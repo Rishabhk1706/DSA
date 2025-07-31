@@ -1,4 +1,4 @@
-//https://leetcode.com/problems/majority-element/description/ (169) 31-07-25  // Boyer-Moore Voting Algorithm
+//https://leetcode.com/problems/majority-element/description/ (169) 31-07-25 Boyer-Moore Voting Algorithm
 
 class Solution {
     public int majorityElement(int[] nums) {
