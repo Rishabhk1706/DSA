@@ -1,0 +1,31 @@
+//https://leetcode.com/problems/majority-element/description/ (169) 31-07-25  // Boyer-Moore Voting Algorithm
+
+class Solution {
+    public int majorityElement(int[] nums) {
+        int n = nums.length;
+        int c = 0;
+        int candidate = -1;
+        for(int ele:nums){
+            if(c==0){
+                candidate=ele;
+                c++;
+            }
+            else if(ele==candidate){
+                c++;
+            }
+            else{
+                c--;
+            }
+        }
+        c=0;
+        for(int ele:nums){
+            if(ele==candidate){
+                c++;
+            }
+        }
+        if(c>(n/2)){
+            return candidate;
+        }
+        return -1;
+    }
+}
