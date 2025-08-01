@@ -1,0 +1,28 @@
+https://leetcode.com/problems/single-number/ (136) 02-08-25  Bit Manipulation using XOR
+
+class Solution {
+    public int singleNumber(int[] nums) {
+        int ans=0;
+        for(int i:nums){
+            ans=ans^i;
+        }
+        return ans;
+    }
+}
+
+
+The XOR (^) operator has the following properties:
+    a⊕a=0 → Any number XORed with itself cancels out.
+    a⊕0=a → Any number XORed with 0 remains unchanged.
+So, when you XOR all elements of the array:
+    The numbers that appear twice cancel each other out (become 0).
+    The single number appears only once and remains.
+
+Input: [4, 1, 2, 1, 2]
+ans = 0
+ans = 0 ^ 4 = 4
+ans = 4 ^ 1 = 5
+ans = 5 ^ 2 = 7
+ans = 7 ^ 1 = 6
+ans = 6 ^ 2 = 4
+Output = 4
