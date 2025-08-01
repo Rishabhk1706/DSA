@@ -1,0 +1,22 @@
+https://leetcode.com/problems/pascals-triangle/ (118) 01-08-25
+
+class Solution {
+    static List<Integer> generate_row(int row){
+        List<Integer> ans_row = new ArrayList<>();
+        int ans=1;
+        ans_row.add(1);
+        for(int col=1;col<row;col++){
+            ans=ans*(row-col);
+            ans=ans/col;
+            ans_row.add(ans);
+        }
+        return ans_row;
+    }
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> res = new ArrayList<>();
+        for(int i=1;i<=numRows;i++){
+            res.add(generate_row(i));
+        }
+        return res;
+    }
+}
