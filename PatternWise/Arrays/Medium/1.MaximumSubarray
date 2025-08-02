@@ -1,0 +1,17 @@
+https://leetcode.com/problems/maximum-subarray/ (53) 02-08-25  Kadanes's Algorithm
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int sum=0;
+        int maxi=nums[0];
+        for(int i=0;i<nums.length;i++){
+            sum+=nums[i];
+            maxi= (maxi<sum)?sum:maxi;
+            if(sum<0){
+                sum=0;
+            }
+        }
+        return maxi;
+
+    }
+}
