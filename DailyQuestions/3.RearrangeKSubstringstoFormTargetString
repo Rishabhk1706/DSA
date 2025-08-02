@@ -1,0 +1,22 @@
+https://leetcode.com/problems/rearrange-k-substrings-to-form-target-string/description/  (3365) 02-08-25
+
+class Solution {
+    public boolean isPossibleToRearrange(String s, String t, int k) {
+        int n = s.length();
+        if(n % k != 0) return false;
+        int p = n/k;
+        Map<String,Integer> map = new HashMap<>();
+        for(int i=0;i<n;i+=p){
+            String temp = s.substring(i,i+p);
+            map.put(temp, map.getOrDefault(temp,0)+1);
+        }
+        for(int i=0;i<t.length();i+=p){
+            String sub = t.substring(i,i+p);
+            int count = map.getOrDefault(sub,0);
+            if(count==0) return false;
+            if(count==1) map.remove(sub);
+            map.put(sub, count-1);
+        }
+        return true;
+    }
+}
