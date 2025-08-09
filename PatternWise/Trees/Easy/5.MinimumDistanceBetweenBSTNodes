@@ -1,4 +1,4 @@
-https://leetcode.com/problems/minimum-distance-between-bst-nodes/ (783) 08-09-25
+https://leetcode.com/problems/minimum-distance-between-bst-nodes/ (783) 09-08-25
 
 class Solution {
     TreeNode prev = null;
