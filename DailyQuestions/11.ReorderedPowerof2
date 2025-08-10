@@ -1,0 +1,24 @@
+https://leetcode.com/problems/reordered-power-of-2/ (869) 10-08-25
+
+class Solution {
+    public boolean reorderedPowerOf2(int n) {
+        int[] freq = frequency(n);
+        for(int i=0;i<=30;i++){
+            int x = 1<<i;
+            int[] power = frequency(x);
+            if(Arrays.equals(freq,power)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static int[] frequency(int n){
+        int[] k = new int[10];
+        while(n>0){
+            k[n%10]++;
+            n/=10;
+        }
+        return k;
+    }
+}
