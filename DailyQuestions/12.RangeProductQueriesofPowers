@@ -1,0 +1,28 @@
+https://leetcode.com/problems/range-product-queries-of-powers/ (2438) 11-08-25
+
+class Solution {
+    public static ArrayList<Integer> getPowers(int n) {
+        ArrayList<Integer> powers = new ArrayList<>();
+        int power = 0;
+        while(n>0){
+            if((n&1)==1){
+                powers.add(1 << power);
+            }
+            n >>= 1;
+            power++;
+        }
+        return powers;
+    }
+    public int[] productQueries(int n, int[][] queries) {
+        ArrayList<Integer> powers = getPowers(n);
+        int[] answer = new int[queries.length];
+        for(int i=0;i<queries.length;i++){
+            long res=1;
+            for(int j=queries[i][0];j<=queries[i][1];j++){
+                res = (res * powers.get(j))%(1000000007);
+            }
+            answer[i]=(int)res;
+        }
+        return answer;
+    }
+}
