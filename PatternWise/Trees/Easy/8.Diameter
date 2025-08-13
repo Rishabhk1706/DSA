@@ -1,0 +1,19 @@
+https://leetcode.com/problems/diameter-of-binary-tree/ (543) 13-08-25
+
+class Solution {
+    public int ans=0;
+    public int maxDepth(TreeNode root) {
+        if(root==null) return 0;
+
+        int leftHeight = maxDepth(root.left);
+        int rightHeight = maxDepth(root.right);
+        
+        ans=Math.max(ans,leftHeight+rightHeight);
+
+        return 1 + Math.max(leftHeight,rightHeight);
+    }
+    public int diameterOfBinaryTree(TreeNode root) {
+        maxDepth(root);
+        return ans;
+    }
+}
