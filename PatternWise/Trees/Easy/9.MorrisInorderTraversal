@@ -1,0 +1,30 @@
+https://leetcode.com/problems/binary-tree-inorder-traversal/description/  (94) 15-08-25   Morris Algorithm
+
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> k = new ArrayList<>();
+        TreeNode curr = root;
+        while(curr!=null){
+            if(curr.left==null){
+                k.add(curr.val);
+                curr=curr.right;
+            }
+            else{
+                TreeNode IP = curr.left;
+                while(IP.right!=null && IP.right!=curr){
+                    IP=IP.right;
+                }
+                if(IP.right==null){
+                    IP.right=curr;
+                    curr=curr.left;
+                }
+                else{
+                    IP.right=null;
+                    k.add(curr.val);
+                    curr=curr.right;
+                }
+            }
+        }
+        return k;
+    }
+}
