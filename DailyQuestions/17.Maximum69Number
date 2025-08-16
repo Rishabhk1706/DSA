@@ -1,0 +1,19 @@
+https://leetcode.com/problems/maximum-69-number/ (1323) 16-08-25
+
+class Solution {
+    public int maximum69Number (int num) {
+        int t = num;
+        int ind=-1;
+        int pos=0;
+        while(t>0){
+            int d = t%10;
+            if(d==6){
+                ind=pos;
+            }
+            t=t/10;
+            pos++;
+        }
+        if(ind==-1) return num;
+        return num + 3 * (int)Math.pow(10,ind);
+    }
+}
