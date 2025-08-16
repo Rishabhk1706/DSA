@@ -1,4 +1,4 @@
-https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/description/ (987) 15-08-25
+https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/description/ (987) 16-08-25
 
 class Triple{
     TreeNode node;
