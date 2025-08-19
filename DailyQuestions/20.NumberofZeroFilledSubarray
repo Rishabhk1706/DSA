@@ -1,0 +1,20 @@
+https://leetcode.com/problems/number-of-zero-filled-subarrays/ (2348) 19-08-25
+
+class Solution {
+    public long zeroFilledSubarray(int[] nums) {
+        long c=0;
+        int l=0,r=0;
+        while(r<nums.length){
+            if(nums[r]==0){
+                c+=(r-l)+1;
+                r++;
+            }
+            else{
+                l=r;
+                l++;
+                r++;
+            }
+        }
+        return c;
+    }
+}
