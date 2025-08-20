@@ -1,0 +1,29 @@
+https://leetcode.com/problems/maximum-width-of-binary-tree (662) 20-08-25
+
+class Pair{
+    TreeNode node;
+    int idx;
+    public Pair(TreeNode node, int idx){
+        this.node = node;
+        this.idx = idx;
+    }
+}
+class Solution {
+    public int widthOfBinaryTree(TreeNode root) {
+        Queue<Pair> q = new LinkedList<>();
+        q.add(new Pair(root,0));
+        int maxi=0;
+        while(q.size()>0){
+            int n = q.size();
+            Pair start = q.peek();
+            Pair end = null;
+            for(int i=0;i<n;i++){
+                end=q.poll();
+                if(end.node.left!=null) q.add(new Pair(end.node.left,2*end.idx+1));
+                if(end.node.right!=null) q.add(new Pair(end.node.right,2*end.idx+2));
+            }
+            maxi = Math.max(maxi,end.idx-start.idx+1);
+        }
+        return maxi;
+    }
+}
