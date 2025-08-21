@@ -1,0 +1,21 @@
+https://www.geeksforgeeks.org/problems/diagonal-traversal-of-binary-tree/1 21-08-25
+
+class Tree {
+    public ArrayList<Integer> diagonal(Node root) {
+        ArrayList<Integer> k = new ArrayList<>();
+        if(root==null) return k;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        while(q.size()>0){
+            Node curr = q.poll();
+            while(curr!=null){
+                if(curr.left!=null){
+                    q.add(curr.left);
+                }
+                k.add(curr.data);
+                curr=curr.right;
+            }
+        }
+        return k;
+    }
+}
