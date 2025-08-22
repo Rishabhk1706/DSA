@@ -1,0 +1,19 @@
+https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/ (230) 22-08-25
+
+class Solution {
+    int ans=0;
+    int res=0;
+    public void levelorder(TreeNode root, int k){
+        if(root==null || ans>=k) return;
+        if(root.left!=null) levelorder(root.left,k);
+        if(++ans==k){
+            res=root.val;
+            return;
+        }
+        if(root.right!=null) levelorder(root.right,k);
+    }
+    public int kthSmallest(TreeNode root, int k) {
+        levelorder(root,k);
+        return res;
+    }
+}
