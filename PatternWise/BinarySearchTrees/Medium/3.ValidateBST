@@ -1,0 +1,14 @@
+https://leetcode.com/problems/validate-binary-search-tree/ (98) 24-08-25
+
+class Solution {
+    public boolean inorder(TreeNode root, TreeNode min, TreeNode max){
+        if(root==null) return true;
+        if(min!=null && root.val<=min.val) return false;
+        if(max!=null && root.val>=max.val) return false;
+        return inorder(root.left,min,root) && inorder(root.right,root,max);
+    }
+    public boolean isValidBST(TreeNode root) {
+        return inorder(root,null,null);
+        
+    }
+}
