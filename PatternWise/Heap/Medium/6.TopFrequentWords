@@ -1,0 +1,35 @@
+https://leetcode.com/problems/top-k-frequent-words/ 26-08-25
+
+class Pair{
+    String s;
+    int i;
+    public Pair(String s,int i){
+        this.s=s;
+        this.i=i;
+    }
+}
+class Solution {
+    public List<String> topKFrequent(String[] words, int k) {
+        PriorityQueue<Pair> pq = new PriorityQueue<>(
+            (a,b) -> a.i == b.i ? b.s.compareTo(a.s) : a.i - b.i
+        );
+        Map<String,Integer> map = new HashMap<>();
+        for(String s : words){
+            map.put(s,map.getOrDefault(s,0)+1);
+        }
+        for(Map.Entry<String,Integer> e : map.entrySet()){
+            String s = e.getKey();
+            int i = e.getValue();
+            pq.add(new Pair(s,i));
+            if(pq.size()>k){
+                pq.poll();
+            }
+        }
+        List<String> res = new ArrayList<>();
+        while(pq.size()>0){
+            res.add(pq.poll().s);
+        }
+        Collections.reverse(res);
+        return res;
+    }
+}
