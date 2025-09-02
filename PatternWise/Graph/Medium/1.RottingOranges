@@ -1,0 +1,61 @@
+https://leetcode.com/problems/rotting-oranges/description/
+
+class Solution {
+    public static boolean isValid(int nr, int nc, int rows, int cols, boolean visited[][],int [][] mat){
+        if(nr>=0 && nr<rows && nc>=0 && nc<cols && !visited[nr][nc] && mat[nr][nc]==1){
+            return true;
+        }
+        return false;
+    }
+    public int bfs(int[][] mat, Queue<int[]> q, int rows, int cols, boolean[][] visited,int fresh){
+        int maxtime=0;
+        while(q.size()>0){
+            int[] curr = q.poll();
+            int curr_row=curr[0];
+            int curr_col=curr[1];
+            int time=curr[2];
+            maxtime = Math.max(maxtime,time);
+            if(mat[curr_row][curr_col] == 1){
+                mat[curr_row][curr_col] = 2;
+                fresh--;
+            }
+            int dr[]={0,1,0,-1};
+            int dc[]={1,0,-1,0};
+            for(int i=0;i<dr.length;i++){
+                int nbr_row=curr_row+dr[i];
+                int nbr_col=curr_col+dc[i];
+                if(isValid(nbr_row,nbr_col,rows,cols,visited,mat)){
+                    visited[nbr_row][nbr_col]=true;
+                    q.add(new int[] {nbr_row,nbr_col,time+1});
+                }
+            }
+        }
+        if(fresh > 0) {
+            return -1;
+        } else {
+            return maxtime;
+        }
+    }
+    public int orangesRotting(int[][] grid) {
+        int n = grid.length;
+        int m = grid[0].length;
+        Queue<int[]> q=new LinkedList<>();
+        boolean [][] visited = new boolean[n][m];
+        int fresh=0;
+        int rott=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==2){
+                    q.add(new int[] {i,j,0});
+                    rott++;
+                }
+                if(grid[i][j]==1){
+                    fresh++;
+                }
+            }
+        }
+        if(fresh==0) return 0;
+        if(fresh!=0 && rott==0) return -1;
+        return bfs(grid,q,n,m,visited,fresh);
+    }
+}
