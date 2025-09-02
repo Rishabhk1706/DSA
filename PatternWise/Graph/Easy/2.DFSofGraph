@@ -1,0 +1,24 @@
+https://www.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1
+
+class Solution {
+    public void helper(ArrayList<ArrayList<Integer>> adj,boolean[] visited, ArrayList<Integer> ans, int ind){
+        visited[ind]=true;
+        ans.add(ind);
+        for(int i : adj.get(ind)){
+            if(!visited[i]){
+                helper(adj,visited,ans,i);
+            }
+        }
+        
+    }
+    public ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> adj) {
+        boolean[] visited = new boolean[adj.size()];
+        ArrayList<Integer> ans = new ArrayList<>();
+        for(int i=0;i<adj.size();i++){
+            if(!visited[i]){
+                helper(adj,visited,ans,i);
+            }
+        }
+        return ans;
+    }
+}
