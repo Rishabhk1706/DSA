@@ -1,0 +1,33 @@
+https://leetcode.com/problems/task-scheduler/ 03-09-25
+
+class Solution {
+    public int leastInterval(char[] tasks, int n) {
+        int[] freq = new int[26];
+        for(char c : tasks){
+            freq[c-'A']++;
+        }
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> b-a);
+        for(int f : freq){
+            if(f>0){
+                pq.add(f);
+            }
+        }
+        int cycles = n+1;
+        int time=0;
+        while(pq.size()>0){
+            List<Integer> l = new ArrayList<>();
+            for(int i=0;i<cycles;i++){
+                if(pq.size()>0){
+                    l.add(pq.poll());
+                }
+            }
+            for(int count : l){
+                if(count-1>0){
+                    pq.add(count-1);
+                }
+            }
+            time+= pq.isEmpty() ? l.size() : cycles;
+        }
+        return time;
+    }
+}
