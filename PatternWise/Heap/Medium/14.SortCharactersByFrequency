@@ -1,0 +1,33 @@
+https://leetcode.com/problems/sort-characters-by-frequency/
+
+class Pair{
+    int v;
+    char ch;
+    public Pair(int v, char ch){
+        this.v=v;
+        this.ch=ch;
+    }
+}
+class Solution {
+    public String frequencySort(String s) {
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b) -> b.v-a.v);
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            map.put(ch,map.getOrDefault(ch,0)+1);
+        } 
+        for(Map.Entry<Character,Integer> e : map.entrySet()){
+            char c = e.getKey();
+            int v = e.getValue();
+            pq.add(new Pair(v,c));
+        }
+        StringBuilder sb = new StringBuilder();
+        while(pq.size()>0){
+            Pair curr = pq.poll();
+            for(int i=0;i<curr.v;i++){
+                sb.append(curr.ch);
+            }
+        }
+        return sb.toString();
+    }
+}

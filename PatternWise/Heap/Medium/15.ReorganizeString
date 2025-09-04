@@ -1,0 +1,45 @@
+https://leetcode.com/problems/reorganize-string/description/
+
+class Pair{
+    char ch;
+    int v;
+    public Pair(int v,char ch){
+        this.v=v;
+        this.ch=ch;
+    }
+}
+class Solution {
+    public String reorganizeString(String s) {
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b) -> b.v-a.v);
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            map.put(ch,map.getOrDefault(ch,0)+1);
+        } 
+        for(Map.Entry<Character,Integer> e : map.entrySet()){
+            char c = e.getKey();
+            int v = e.getValue();
+            pq.add(new Pair(v,c));
+        }
+        StringBuilder sb = new StringBuilder();
+        while(pq.size()>1){
+            Pair curr = pq.poll();
+            Pair curr2 = pq.poll();
+            sb.append(curr.ch);
+            sb.append(curr2.ch);
+            if(curr.v-1>0){
+                pq.add(new Pair(curr.v-1,curr.ch));
+            }
+            if(curr2.v-1>0){
+                pq.add(new Pair(curr2.v-1,curr2.ch));
+            }
+        }
+        while(pq.size()>0){
+            if(pq.peek().v>1){
+                return "";
+            }
+            sb.append(pq.poll().ch);
+        }
+        return sb.toString();
+    }
+}
