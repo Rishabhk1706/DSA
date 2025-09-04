@@ -1,0 +1,17 @@
+https://leetcode.com/problems/find-closest-person/description 04-09-25
+
+class Solution {
+    public int findClosest(int x, int y, int z) {
+        int xdist = Math.abs(x-z);
+        int ydist = Math.abs(y-z);
+        if(xdist<ydist){
+            return 1;
+        }
+        else if(xdist>ydist){
+            return 2;
+        }
+        else{
+            return 0;
+        }
+    }
+}
