@@ -1,0 +1,13 @@
+https://leetcode.com/problems/minimum-operations-to-make-the-integer-zero 05-09-25
+
+class Solution {
+    public int makeTheIntegerZero(int num1, int num2) {
+        for(long i=0;i<=60;i++){
+            long ans = num1-i*num2;
+            if(Long.bitCount(ans)<=i && i<=ans){
+                return (int) i;
+            }
+        }
+        return -1;
+    }
+}
