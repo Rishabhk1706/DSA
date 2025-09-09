@@ -1,0 +1,22 @@
+https://leetcode.com/problems/word-break/ 09-09-25
+
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Queue<Integer> q = new LinkedList<>();
+        boolean[] visited = new boolean[s.length()];
+        q.add(0);
+        while(!q.isEmpty()){
+            int start = q.poll();
+            if(visited[start]) continue;
+            for(String word : wordDict){
+                int end = start + word.length();
+                if(end<=s.length() && s.startsWith(word, start)){
+                    if(end==s.length()) return true;
+                    q.add(end);
+                }
+            }
+            visited[start]=true;
+        }
+        return false;
+    }
+}
