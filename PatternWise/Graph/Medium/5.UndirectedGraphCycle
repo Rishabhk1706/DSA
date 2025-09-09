@@ -1,0 +1,38 @@
+https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1
+
+class Solution {
+    public boolean dfs(int node, int parent, List<List<Integer>> adj, boolean[] visited){
+        visited[node] = true;
+        for(int nbr : adj.get(node)){
+            if(!visited[nbr]){
+                if(dfs(nbr,node,adj,visited)){
+                    return true;
+                }
+            }
+            else if(nbr != parent){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean isCycle(int V, int[][] edges) {
+        boolean visited[] = new boolean[V];
+        List<List<Integer>> adj = new ArrayList<>();
+        for(int i=0;i<V;i++) adj.add(new ArrayList<>());
+        for(int[] e : edges){
+            int u = e[0];
+            int v = e[1];
+            adj.get(u).add(v);
+            adj.get(v).add(u);
+        }
+        
+        for(int i=0;i<V;i++){
+            if(!visited[i]){
+                if(dfs(i, -1, adj, visited)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
