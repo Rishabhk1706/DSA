@@ -1,0 +1,43 @@
+https://leetcode.com/problems/minimum-number-of-people-to-teach/description  10-09-25
+
+class Solution {
+    public int minimumTeachings(int n, int[][] languages, int[][] friendships) {
+        Set<Integer> set = new HashSet<>();
+        for(int[] arr : friendships){
+            int x = arr[0]-1;
+            int y = arr[1]-1;
+            boolean flag=false;
+            for(int i : languages[x]){
+                for(int j : languages[y]){
+                    if(i==j){
+                        flag=true;
+                        break;
+                    }
+                }
+                if(flag) break;
+            }
+            if(!flag){
+                set.add(x);
+                set.add(y);
+            }
+        }
+
+        int mini = languages.length;
+        for(int i=1;i<=n;i++){
+            int minimumTeach=0;
+            for(int per : set){
+                boolean flag=false;
+                for(int lang : languages[per]){
+                    if(lang==i){
+                        flag=true;
+                        break;
+                    }
+                }
+                if(!flag) minimumTeach++;
+            }
+            mini = Math.min(mini,minimumTeach);
+        }
+        return mini;
+    }
+}
+
