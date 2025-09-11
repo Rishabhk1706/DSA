@@ -1,0 +1,18 @@
+https://leetcode.com/problems/subarray-product-less-than-k/ Sliding Window
+
+class Solution {
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        int c=0;
+        int start=0;
+        int pro=1;
+        for(int end=0;end<nums.length;end++){
+            pro*=nums[end];
+            while(pro>=k && start<=end){
+                pro/=nums[start];
+                start++;
+            }
+            c+=(end-start+1);
+        }
+        return c;
+    }
+}
