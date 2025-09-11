@@ -1,0 +1,25 @@
+https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1
+
+class Solution {
+    public int longestSubarray(int[] arr, int k) {
+        int n = arr.length;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        int prefixSum = 0;
+        int maxlen = 0;
+        for(int i=0;i<n;i++){
+            prefixSum+=arr[i];
+            
+            if(prefixSum==k){
+                maxlen=(i+1);
+            }
+            
+            int val = prefixSum - k;
+            if(map.containsKey(val)){
+                maxlen = Math.max(maxlen, i-map.get(val));
+            }
+            
+            map.put(prefixSum, map.getOrDefault(prefixSum,i));
+        }
+        return maxlen;
+    }
+}
