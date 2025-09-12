@@ -1,0 +1,11 @@
+https://leetcode.com/problems/vowels-game-in-a-string/description/ 12-09-25
+
+class Solution {
+    public boolean doesAliceWin(String s) {
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            if(ch=='e'||ch=='u'||ch=='i'||ch=='o'||ch=='a') return true;
+        }
+        return false;
+    }
+}
