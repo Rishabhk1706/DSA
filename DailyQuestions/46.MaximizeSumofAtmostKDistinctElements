@@ -1,0 +1,22 @@
+https://leetcode.com/problems/maximize-sum-of-at-most-k-distinct-elements/description/ 14-09-25
+
+class Solution {
+    public int[] maxKDistinct(int[] nums, int k) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        int dis = 1;
+        for(int i=1;i<n;i++){
+            if(nums[i]!=nums[i-1]) dis++;
+        }
+        dis = Math.min(dis,k);
+        int arr[] = new int[dis];
+        arr[0]=nums[n-1];
+        int j=1;
+        for(int i=n-2;i>=0;i--){
+            if(nums[i]!=nums[i+1] && j<dis){
+                arr[j++] = nums[i];
+            }
+        }
+        return arr;
+    }
+}
