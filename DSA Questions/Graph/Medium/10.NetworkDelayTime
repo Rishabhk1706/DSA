@@ -1,0 +1,49 @@
+https://leetcode.com/problems/network-delay-time/
+
+class Pair {
+    int nbr;
+    int weight;
+    Pair(int n, int w) {
+        nbr = n;
+        weight = w;
+    }
+}
+class Solution {
+    public int networkDelayTime(int[][] times, int n, int k) {
+        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+        for(int i=0;i<=n;i++){
+            adj.add(new ArrayList<>());
+        }
+        for(int[] edge : times){
+            int u = edge[0];
+            int v = edge[1];
+            int w = edge[2];
+            adj.get(u).add(new Pair(v, w));
+        }
+        int[] dist = new int[n + 1];
+        Arrays.fill(dist, (int) 1e9);
+        dist[k] = 0;
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.weight - b.weight);
+        pq.add(new Pair(k, 0));
+        while(!pq.isEmpty()){
+            Pair curr = pq.poll();
+            int node = curr.nbr;
+            int d = curr.weight;
+            if(d > dist[node]) continue;
+            for(Pair p : adj.get(node)) {
+                int v = p.nbr;
+                int wt = p.weight;
+                if(dist[node] + wt < dist[v]){
+                    dist[v] = dist[node] + wt;
+                    pq.add(new Pair(v, dist[v]));
+                }
+            }
+        }
+        int ans = 0;
+        for(int i=1;i<=n;i++){
+            if (dist[i]==(int) 1e9) return -1;
+            ans = Math.max(ans, dist[i]);
+        }
+        return ans;
+    }
+}

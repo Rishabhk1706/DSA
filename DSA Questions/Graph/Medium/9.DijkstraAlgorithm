@@ -1,0 +1,43 @@
+https://www.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1
+
+class Pair{
+    int nbr;
+    int weight;
+    Pair(int n,int w){
+        nbr = n;
+        weight = w;
+    }
+}
+class Solution {
+    public int[] dijkstra(int V, int[][] edges, int src) {
+        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+        for(int i=0;i<V;i++){
+            adj.add(new ArrayList<Pair>());
+        }
+        for(int i=0;i<edges.length;i++){
+            int u = edges[i][0];
+            int v = edges[i][1];
+            int w = edges[i][2];
+            adj.get(u).add(new Pair(v,w));
+            adj.get(v).add(new Pair(u,w));
+        }
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b) -> a.weight - b.weight);
+        int[] d = new int[V];
+        Arrays.fill(d,Integer.MAX_VALUE);
+        d[src]=0;
+        pq.add(new Pair(src,0));
+        while(!pq.isEmpty()){
+            Pair curr = pq.poll();
+            int node = curr.nbr;
+            for(Pair c : adj.get(node)){
+                int v = c.nbr;
+                int wt = c.weight;
+                if(d[node]+wt < d[v]){
+                    d[v] = d[node]+wt;
+                    pq.add(new Pair(v,wt));
+                }
+            }
+        }
+        return d;
+    }
+}
