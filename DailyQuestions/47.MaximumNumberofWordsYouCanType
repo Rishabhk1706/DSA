@@ -1,0 +1,22 @@
+https://leetcode.com/problems/maximum-number-of-words-you-can-type
+
+class Solution {
+    public int canBeTypedWords(String text, String brokenLetters) {
+        Set<Character> set = new HashSet<>();
+        for(char ch : brokenLetters.toCharArray()){
+            set.add(ch);
+        }
+        int count=0;
+        for(String ch : text.split(" ")){
+            boolean flag=false;
+            for(char c : ch.toCharArray()){
+                if(set.contains(c)){
+                    flag=true;
+                    break;
+                }
+            }
+            if(!flag) count++;
+        }
+        return count;
+    }
+}
