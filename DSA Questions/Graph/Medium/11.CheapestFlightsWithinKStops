@@ -1,0 +1,36 @@
+https://leetcode.com/problems/cheapest-flights-within-k-stops/
+
+class Solution {
+    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+        ArrayList<ArrayList<int[]>> adj = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            adj.add(new ArrayList<int[]>());
+        }
+        for(int i=0;i<flights.length;i++){
+            int u = flights[i][0];
+            int v = flights[i][1];
+            int w = flights[i][2];
+            adj.get(u).add(new int[] {v,w});
+        }
+        int[][] dist = new int[n][k + 2];
+        for (int[] d : dist) Arrays.fill(d, Integer.MAX_VALUE);
+        dist[src][0] = 0;
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        pq.offer(new int[]{0, src, 0});
+        while(!pq.isEmpty()){
+            int[] curr = pq.poll();
+            int cost = curr[0], node = curr[1], stops = curr[2];
+            if (node == dst) return cost;
+            if (stops > k) continue;
+            for (int[] edge : adj.get(node)) {
+                int next = edge[0], price = edge[1];
+                int newCost = cost + price;
+                if(newCost < dist[next][stops + 1]){
+                    dist[next][stops + 1] = newCost;
+                    pq.offer(new int[]{newCost, next, stops + 1});
+                }
+            }
+        }
+        return -1;
+    }
+}
