@@ -1,0 +1,45 @@
+https://leetcode.com/problems/path-with-maximum-probability/ 17-09-25
+
+class Pair{
+    int nbr;
+    double wt;
+    public Pair(int nbr,double wt){
+        this.nbr=nbr;
+        this.wt = wt;
+    }
+}
+class Solution {
+    public double maxProbability(int n, int[][] edges, double[] succProb, int start_node, int end_node) {
+        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            adj.add(new ArrayList<>());
+        }
+        for(int i=0;i<edges.length;i++){
+            int u = edges[i][0];
+            int v = edges[i][1];
+            adj.get(u).add(new Pair(v,succProb[i]));
+            adj.get(v).add(new Pair(u,succProb[i]));
+        }
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> Double.compare(b.wt, a.wt));
+        double[] d = new double[n];
+        Arrays.fill(d,0.0);
+        d[start_node]=1.0;
+        pq.add(new Pair(start_node,1.0));
+        while(pq.size()>0){
+            Pair curr = pq.poll();
+            int node = curr.nbr;
+            double wei = curr.wt;
+            if(node == end_node) return wei;
+            if(wei < d[node]) continue;
+            for(Pair k : adj.get(node)){
+                int v = k.nbr;
+                double prob = k.wt;
+                if(d[node] * prob > d[v]){
+                    d[v] = d[node] * prob;
+                    pq.add(new Pair(v,d[v]));
+                }
+            }
+        }
+        return d[end_node];
+    }
+}
