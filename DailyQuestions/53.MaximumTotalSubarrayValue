@@ -1,0 +1,13 @@
+https://leetcode.com/problems/maximum-total-subarray-value-i/description/  21-09-25
+
+class Solution {
+    public long maxTotalValue(int[] nums, int k) {
+        long maxi = Integer.MIN_VALUE;
+        long mini = Integer.MAX_VALUE;
+        for(int val : nums){
+            maxi = Math.max(maxi,val);
+            mini = Math.min(mini,val);
+        }
+        return (long) (maxi-mini)*k;
+    }
+}
