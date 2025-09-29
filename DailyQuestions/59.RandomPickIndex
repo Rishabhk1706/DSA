@@ -1,0 +1,19 @@
+https://leetcode.com/problems/random-pick-index  29-09-25
+
+class Solution {
+    Map<Integer,List<Integer>> ind;
+    public Solution(int[] nums) {
+        this.ind = new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            if(!ind.containsKey(nums[i])){
+                ind.put(nums[i],new ArrayList<>());
+            }
+            ind.get(nums[i]).add(i);
+        }
+    }
+    
+    public int pick(int target) {
+        int n=ind.get(target).size();
+        return ind.get(target).get((int)(Math.random()*n));
+    }
+}
