@@ -1,0 +1,32 @@
+https://leetcode.com/problems/minimum-time-to-complete-trips/ 05-10-25
+
+class Solution {
+    public boolean possible(int[] time,long t, int totalTrips){
+        long total = 0;
+        for(int v : time){
+            total+=(t/v);
+            if(total>=totalTrips) return true;
+        }
+        return false;
+    }
+    public long minimumTime(int[] time, int totalTrips) {
+        long max=0;
+        for(int t : time){
+            if(t>max) max=t;
+        }
+        long left = 1;
+        long right = max * (long)totalTrips;
+        long res = right;
+        while(left<=right){
+            long mid = left + (right-left)/2;
+            if(possible(time,mid,totalTrips)){
+                res=mid;
+                right=mid-1;
+            }
+            else{
+                left=mid+1;
+            }
+        }
+        return res;
+    }
+}
