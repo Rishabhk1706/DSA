@@ -1,0 +1,30 @@
+http://leetcode.com/problems/successful-pairs-of-spells-and-potions/ 08-10-25
+
+class Solution {
+    public static int f(int spell, int[] potions, long success){
+        int c=potions.length;
+        int l=0;
+        int r=potions.length-1;
+        while(l<=r){
+            int mid = l + (r-l)/2;
+            long pro = (long) spell * potions[mid];
+            if(pro>=success){
+                c=mid;
+                r=mid-1;
+            }
+            else{
+                l=mid+1;
+            }
+        }
+        return potions.length-c;
+    }
+    public int[] successfulPairs(int[] spells, int[] potions, long success) {
+        int n = spells.length;
+        int[] pairs = new int[n];
+        Arrays.sort(potions);
+        for(int i=0;i<n;i++){
+            pairs[i] = f(spells[i],potions,success);
+        }
+        return pairs;
+    }
+}
