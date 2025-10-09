@@ -1,0 +1,24 @@
+https://leetcode.com/problems/find-the-minimum-amount-of-time-to-brew-potions 09-10-25
+
+class Solution {
+    public long minTime(int[] skill, int[] mana) {
+       int n = skill.length;
+       int m = mana.length;
+       long[] time = new long[n];
+       for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            long t = (long) skill[j] * mana[i];
+            if(j==0){
+                time[j] = time[j] + t;
+            }
+            else{
+                time[j] = Math.max(time[j],time[j-1]) + t;
+            }
+        }
+        for(int j=n-2;j>=0;j--){
+            time[j] = time[j+1] - (long) skill[j+1] * mana[i];
+        }
+       }
+       return time[n-1];
+    }
+}
