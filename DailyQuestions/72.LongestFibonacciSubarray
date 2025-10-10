@@ -1,0 +1,29 @@
+https://leetcode.com/contest/biweekly-contest-167/problems/longest-fibonacci-subarray/ 11-10-25
+
+class Solution {
+    public int longestSubarray(int[] nums) {
+        int n = nums.length;
+        if(n<2) return n;
+        int len=2;
+        for(int i=0;i<n-2;i++){
+            if(nums[i]+nums[i+1]==nums[i+2]){
+                int temp=3;
+                int l=i+1;
+                int r=i+2;
+                while(r<nums.length-1){
+                    if(nums[l] + nums[r] == nums[r+1]){
+                        temp++;
+                        l=r;
+                    }
+                    else{
+                        break;
+                    }
+                    r++;
+                }
+                i=r-2;
+                len = Math.max(len,temp);
+            }
+        }
+        return len;
+    }
+}
