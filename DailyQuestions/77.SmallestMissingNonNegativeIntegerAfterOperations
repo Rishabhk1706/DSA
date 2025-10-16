@@ -1,0 +1,18 @@
+https://leetcode.com/problems/smallest-missing-non-negative-integer-after-operations/description 16-10-25
+
+class Solution {
+    public int findSmallestInteger(int[] nums, int value) {
+        int[] res = new int[value];
+        for(int i : nums){
+            int v = ((i%value)+value)%value;
+            res[v]++;
+        }
+        int ind=0;
+        while(true){
+            int x = ind % value;
+            if(res[x]==0) return ind;
+            res[x]--;
+            ind++;
+        }
+    }
+}
