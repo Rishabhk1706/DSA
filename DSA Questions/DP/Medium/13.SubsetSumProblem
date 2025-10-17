@@ -1,0 +1,55 @@
+https://www.geeksforgeeks.org/problems/subset-sum-problem-1611555638/1 
+
+// Memorization  - Time Complexity = O(n x sum)  Space = O(n x sum) + O(n) (recursion stack) 
+
+class Solution {
+    public static boolean f(int i, int target, int[] arr, int[][] dp){
+        if(target==0) return true;
+        if(i==0) return arr[i]==target;
+        if(dp[i][target] != -1){
+            return dp[i][target]==1 ? true : false;
+        }
+        boolean not_take = f(i-1,target,arr,dp);
+        boolean take = false;
+        if(arr[i]<=target){
+            take = f(i-1,target-arr[i],arr,dp);
+        }
+        boolean val = take || not_take;
+        dp[i][target] = val ? 1 : 0;
+        return val;
+    }
+    static Boolean isSubsetSum(int arr[], int sum) {
+        int n = arr.length;
+        int[][] dp = new int[n][sum+1];
+        for(int i=0;i<n;i++){
+            Arrays.fill(dp[i],-1);
+        }
+        return f(n-1,sum,arr,dp);
+    }
+}
+
+// Tabulation
+
+class Solution {
+    static Boolean isSubsetSum(int arr[], int sum) {
+        int n = arr.length;
+        boolean[][] dp = new boolean[n][sum+1];
+        for(int i=0;i<n;i++){
+            dp[i][0] = true;
+        }
+        if(arr[0] <= sum){
+            dp[0][arr[0]] = true;
+        }
+        for(int i=1;i<n;i++){
+            for(int target=1;target<=sum;target++){
+                boolean not_take = dp[i-1][target];
+                boolean take = false;
+                if(arr[i]<=target){
+                    take = dp[i-1][target-arr[i]];
+                }
+                dp[i][target] = take || not_take;
+            }
+        }
+        return dp[n-1][sum];
+    }
+}
