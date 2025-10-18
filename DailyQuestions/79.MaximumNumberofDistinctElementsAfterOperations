@@ -1,0 +1,19 @@
+https://leetcode.com/problems/maximum-number-of-distinct-elements-after-operations 18-10-25
+
+class Solution {
+    public int maxDistinctElements(int[] nums, int k) {
+        Arrays.sort(nums);
+        long prev = Integer.MIN_VALUE;
+        int c=0;
+        for(int i=0;i<nums.length;i++){
+            long before = nums[i] - k;
+            long after = nums[i] + k;
+            long val = Math.max(before,prev+1);
+            if(val<=after){
+                c++;
+                prev = val;
+            }
+        }
+        return c;
+    }
+}
