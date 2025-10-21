@@ -1,0 +1,10 @@
+https://leetcode.com/problems/minimum-sensors-to-cover-grid/  21-10-25
+
+class Solution {
+    public int minSensors(int n, int m, int k) {
+        int cover = 2*k+1;
+        int r = (n+cover-1)/cover;
+        int c = (m+cover-1)/cover;
+        return r*c;
+    }
+}
