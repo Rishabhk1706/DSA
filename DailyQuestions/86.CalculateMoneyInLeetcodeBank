@@ -1,0 +1,21 @@
+https://leetcode.com/problems/calculate-money-in-leetcode-bank  25-10-25
+
+class Solution {
+    public int totalMoney(int n){
+        int sum=0;
+        int j=1;
+        int k=0;
+        for(int i=0;i<n;i++){
+            if(i%7==0){
+                sum+=j;
+                j++;
+                k=j;
+            }
+            else{
+                sum+=k;
+                k++;
+            }
+        }
+        return sum;
+    }
+}
