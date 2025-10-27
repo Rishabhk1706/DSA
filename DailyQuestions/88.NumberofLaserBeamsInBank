@@ -1,0 +1,24 @@
+https://leetcode.com/problems/number-of-laser-beams-in-a-bank 27-10-25
+
+class Solution {
+    public static int count(String s){
+        int c=0;
+        for(char ch : s.toCharArray()){
+            c+=ch-'0';
+        }
+        return c;
+    }
+    public int numberOfBeams(String[] bank) {
+        int prev=0;
+        int ans=0;
+        for(String s : bank){
+            int c = count(s);
+            if(c==0){
+                continue;
+            }
+            ans+=(c*prev);
+            prev=c;
+        }
+        return ans;
+    }
+}
