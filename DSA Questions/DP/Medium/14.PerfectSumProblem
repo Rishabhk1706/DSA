@@ -1,0 +1,15 @@
+https://www.geeksforgeeks.org/problems/perfect-sum-problem5633/1
+
+class Solution {
+    public int perfectSum(int[] nums, int target) {
+        int n = nums.length;
+        int[] dp = new int[target+1];
+        dp[0] = 1;
+        for(int i=0;i<n;i++){
+            for(int j=target;j>=nums[i];j--){
+                dp[j] = dp[j] + dp[j-nums[i]];
+            }
+        }
+        return dp[target];
+    }
+}
