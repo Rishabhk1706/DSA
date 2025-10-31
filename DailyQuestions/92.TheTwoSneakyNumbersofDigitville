@@ -1,0 +1,17 @@
+https://leetcode.com/problems/the-two-sneaky-numbers-of-digitville 31-10-25
+
+class Solution {
+    public int[] getSneakyNumbers(int[] nums) {
+        int max=0;
+        Set<Integer> set = new HashSet<>();
+        int[] res = new int[2];
+        int j=0;
+        for(int i=0;i<nums.length;i++){
+            if(set.contains(nums[i])){
+                res[j++] = nums[i];
+            }
+            set.add(nums[i]);
+        }
+        return res;
+    }
+}
