@@ -1,0 +1,38 @@
+https://leetcode.com/problems/all-elements-in-two-binary-search-trees 02-11-25
+
+class Solution {
+    public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
+        List<Integer> a = new ArrayList<>();
+        List<Integer> b = new ArrayList<>();
+        traverse(root1, a);
+        traverse(root2, b);
+        List<Integer> res = new ArrayList<>();
+        int i = 0;
+        int j = 0;
+        while(i < a.size() && j < b.size()){
+            if(a.get(i) < b.get(j)){
+                res.add(a.get(i));
+                i++;
+            }
+            else{
+                res.add(b.get(j));
+                j++;
+            }
+        }
+        while(i<a.size()){
+            res.add(a.get(i++));
+        }
+        while(j<b.size()){
+            res.add(b.get(j++));
+        }
+        return res;
+    }
+    private void traverse(TreeNode root, List<Integer> al){
+        if(root == null){
+            return;
+        }
+        traverse(root.left, al);
+        al.add(root.val);
+        traverse(root.right, al);
+    }
+}
