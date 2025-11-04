@@ -58,3 +58,22 @@ class Solution {
         return maxi;
     }
 }
+
+//Another Method
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        List<Integer> list = new ArrayList<>();
+        for(int num : nums){
+            int i = Collections.binarySearch(list,num);
+            if(i<0) i = -(i+1);
+            
+            if(i==list.size()){
+                list.add(num);
+            }
+            else{
+                list.set(i,num);
+            }
+        }
+        return list.size();
+    }
+}
