@@ -1,0 +1,24 @@
+https://leetcode.com/problems/minimum-distance-between-three-equal-elements-ii/  09-11-25
+
+class Solution {
+    public int minimumDistance(int[] nums) {
+        int mini = Integer.MAX_VALUE;
+        HashMap<Integer,ArrayList<Integer>> mp = new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            if(!mp.containsKey(nums[i])){
+                mp.put(nums[i], new ArrayList<>());
+            }
+            mp.get(nums[i]).add(i);
+        }
+        for(ArrayList<Integer> q : mp.values()){
+            if(q.size()<3) continue;
+            for(int i=0;i<q.size()-2;i++){
+                int fir = q.get(i);
+                int sec = q.get(i+1);
+                int thir = q.get(i+2);
+                mini = Math.min(mini, Math.abs(sec-fir) + Math.abs(thir-sec) + Math.abs(thir-fir));
+            }
+        }
+        return (mini==Integer.MAX_VALUE) ? -1 : mini;
+    }
+}
