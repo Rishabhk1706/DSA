@@ -1,0 +1,34 @@
+https://leetcode.com/problems/minimum-window-substring/
+
+class Solution {
+    public String minWindow(String s, String t) {
+        if(s.length()==0 || t.length()==0 || s.length()<t.length()) return new String();
+        int[] f = new int[128];
+        int l=0;
+        int len = t.length();
+        int startInd = 0;
+        int mini = Integer.MAX_VALUE;
+        for(char i : t.toCharArray()){
+            f[i]++;
+        }
+        char[] ss = s.toCharArray();
+        for(int r=0;r<s.length();r++){
+            if(f[ss[r]] > 0){
+                len--;
+            }
+            f[ss[r]]--;
+            while(len==0){
+                if(r-l+1 < mini){
+                    startInd = l;
+                    mini = r-l+1;
+                }
+                if(f[ss[l]] == 0){
+                    len++;
+                }
+                f[ss[l]]++;
+                l++;
+            }
+        }
+        return mini == Integer.MAX_VALUE ? new String() : new String(ss,startInd,mini);
+    }
+}
