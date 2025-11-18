@@ -1,0 +1,46 @@
+https://leetcode.com/problems/display-table-of-food-orders-in-a-restaurant  18-11-25
+
+class Solution {
+    public List<List<String>> displayTable(List<List<String>> orders) {
+        HashMap<Integer,List<String>> map = new HashMap<>();
+        TreeSet<String> items = new TreeSet<>();
+        for(List<String> s : orders){
+            int table = Integer.parseInt(s.get(1));
+            if(!map.containsKey(table)){
+                map.put(table, new ArrayList<>());
+            }
+            map.get(table).add(s.get(2));
+            items.add(s.get(2));
+        }
+
+        List<List<String>> ans = new ArrayList<>();
+        List<String> top = new ArrayList<>();
+        top.add("Table");
+        for(String i : items){
+            top.add(i);
+        }
+        ans.add(top);
+
+        List<Integer> tables = new ArrayList<>(map.keySet());
+        Collections.sort(tables);
+
+        for(int k : tables){
+            List<String> tt = new ArrayList<>();
+            tt.add(String.valueOf(k));
+            HashMap<String,Integer> st = new HashMap<>();
+            for(String q : map.get(k)){
+                st.put(q,st.getOrDefault(q,0)+1);
+            }
+            for(String i : items){
+                if(st.containsKey(i)){
+                    tt.add(String.valueOf(st.get(i)));
+                }
+                else{
+                    tt.add("0");
+                }
+            }
+            ans.add(tt);
+        }
+        return ans;
+    }
+}
