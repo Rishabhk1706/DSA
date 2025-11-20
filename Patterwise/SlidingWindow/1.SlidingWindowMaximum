@@ -1,0 +1,57 @@
+https://leetcode.com/problems/sliding-window-maximum/description/
+
+// Prefix suffix Approach
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        int[] res = new int[n-k+1];
+        int[] prefix = new int[n];
+        prefix[0] = nums[0];
+        int[] suffix = new int[n];
+        suffix[n-1] = nums[n-1];
+        for(int i=1;i<n;i++){
+            if(i%k==0){
+                prefix[i] = nums[i];
+            }
+            else{
+                prefix[i] = Math.max(prefix[i-1],nums[i]);
+            }
+        }
+        for(int i=n-2;i>=0;i--){
+            if((i+1)%k==0){
+                suffix[i] = nums[i];
+            }
+            else{
+                suffix[i] = Math.max(suffix[i+1],nums[i]);
+            }
+        }
+        int ind=0;
+        for(int i=k-1;i<n;i++){
+            res[ind++] = Math.max(prefix[i],suffix[i-k+1]);
+        }
+        return res;
+    }
+}
+
+//ArrayDeque
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        int[] res = new int[n-k+1];
+        int ind=0;
+        Deque<Integer> dq = new ArrayDeque<>();
+        for(int i=0;i<n;i++){
+            if(!dq.isEmpty() && dq.peekFirst()<=i-k){
+                dq.pollFirst();
+            }
+            while(!dq.isEmpty() && nums[i]>=nums[dq.peekLast()]){
+                dq.pollLast();
+            }
+            dq.offerLast(i);
+            if(i>=k-1){
+                res[ind++] = nums[dq.peekFirst()];
+            }
+        }
+        return res;
+    }
+}
