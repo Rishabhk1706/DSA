@@ -1,0 +1,13 @@
+https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three 22-11-25
+
+class Solution {
+    public int minimumOperations(int[] nums) {
+        int c=0;
+        for(int i : nums){
+            if(i%3!=0){
+                c++;
+            }
+        }
+        return c;
+    }
+}
