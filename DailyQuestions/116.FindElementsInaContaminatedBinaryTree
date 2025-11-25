@@ -1,0 +1,29 @@
+https://leetcode.com/problems/find-elements-in-a-contaminated-binary-tree 25-11-25
+
+class FindElements {
+    private HashSet<Integer> set = new HashSet<>();
+    public void helper(TreeNode cur){
+        if(cur==null) return;
+        if(cur.left!=null){
+            cur.left.val = 2*cur.val+1;
+            set.add(cur.left.val);
+        }
+        if(cur.right!=null){
+            cur.right.val = 2*cur.val+2;
+            set.add(cur.right.val);
+        }
+        helper(cur.left);
+        helper(cur.right);
+    }
+    public FindElements(TreeNode root) {
+        if(root==null) return;
+        root.val=0;
+        set.add(0);
+        helper(root);
+    }
+    
+    public boolean find(int target) {
+        if(set.contains(target)) return true;
+        return false;
+    }
+}
