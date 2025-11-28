@@ -1,0 +1,21 @@
+https://leetcode.com/problems/number-of-substrings-containing-all-three-characters 28-11-25
+
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int n = s.length();
+        Map<Character,Integer> map = new HashMap<>();
+        int c=0;
+        int l=0;
+        char[] x = s.toCharArray();
+        for(int r=0;r<n;r++){
+            map.put(x[r],map.getOrDefault(x[r],0)+1);
+            while(map.size()==3){
+                c+=n-r;
+                map.put(x[l],map.getOrDefault(x[l],0)-1);
+                if(map.get(x[l])==0) map.remove(x[l]);
+                l++;
+            }
+        }
+        return c;
+    }
+}
