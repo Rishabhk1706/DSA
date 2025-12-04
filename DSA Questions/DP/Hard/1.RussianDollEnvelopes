@@ -1,0 +1,27 @@
+https://leetcode.com/problems/russian-doll-envelopes/solutions/7392118/smart-sorting-lis-magic-easy-solution-by-9za0/
+
+class Solution {
+    public int maxEnvelopes(int[][] envelopes) {
+        Arrays.sort(envelopes, (a,b) -> (a[0]==b[0]) ?  b[1]-a[1] : a[0]-b[0]);
+        int[] height = new int[envelopes.length];
+        for(int i=0;i<envelopes.length;i++){
+            height[i] = envelopes[i][1];
+        }
+        return lis(height);
+    }
+    public static int lis(int[] heights){
+        List<Integer> list = new ArrayList<>();
+        for(int h : heights){
+            int i = Collections.binarySearch(list,h);
+            if(i<0) i = -(i+1);
+            
+            if(i==list.size()){
+                list.add(h);
+            }
+            else{
+                list.set(i,h);
+            }
+        }
+        return list.size();
+    }
+}
