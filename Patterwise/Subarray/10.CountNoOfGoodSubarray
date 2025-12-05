@@ -1,0 +1,24 @@
+https://leetcode.com/problems/count-the-number-of-good-subarrays/description
+
+class Solution {
+    public long countGood(int[] nums, int k) {
+        int n = nums.length;
+        long pairs=0;
+        long c=0;
+        HashMap<Integer,Long> freq = new HashMap<>();
+        int l=0;
+        for(int r=0;r<n;r++){
+            long fi = freq.getOrDefault(nums[r],0L);
+            pairs+=fi;
+            freq.put(nums[r],fi+1);
+            while(pairs>=k){
+                c+=(n-r);
+                long fj = freq.get(nums[l]);
+                freq.put(nums[l], fj-1);
+                pairs-=(fj-1);
+                l++;
+            }
+        }
+        return c;
+    }
+}
