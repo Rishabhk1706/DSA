@@ -1,0 +1,24 @@
+https://leetcode.com/problems/minimum-number-of-operations-to-move-all-balls-to-each-box/description/ 10-12-25
+
+class Solution {
+    public int[] minOperations(String boxes) {
+        int n = boxes.length();
+        int[] ans = new int[n];
+        char[] s = boxes.toCharArray();
+        int moves=0;
+        int balls=0;
+        for(int i=0;i<n;i++){
+            ans[i]+=moves;
+            if(s[i]=='1') balls++;
+            moves+=balls;
+        }
+        moves=0;
+        balls=0;
+        for(int i=n-1;i>=0;i--){
+            ans[i]+=moves;
+            if(s[i]=='1') balls++;
+            moves+=balls;
+        }
+        return ans;
+    }
+}
