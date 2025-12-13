@@ -1,0 +1,21 @@
+https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/description/ 13-12-25
+
+class Solution {
+    private char[] ab = {'a','b','c'};
+    public void helper(List<String> al, int n,String s){
+        if(s.length()==n){
+            al.add(s);
+            return;
+        }
+        for(char ch : ab){
+            if(s.length()>=1 && s.charAt(s.length()-1)==ch) continue;
+            helper(al,n,s+ch);
+        }
+    }
+    public String getHappyString(int n, int k) {
+        List<String> al = new ArrayList<>();
+        helper(al,n,"");
+        if(k>al.size()) return "";
+        return al.get(k-1);
+    }
+}
