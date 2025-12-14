@@ -1,0 +1,25 @@
+https://leetcode.com/problems/reverse-words-with-same-vowel-count/description/ 14-12-25
+
+class Solution {
+    public static int vow(String sk){
+        int c=0;
+        for(char ch : sk.toCharArray()){
+            if(ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u'){
+                c++;
+            }
+        }
+        return c;
+    }
+    public String reverseWords(String s) {
+        String[] words = s.split("\\s+");
+        int v = vow(words[0]);
+        StringBuilder sb = new StringBuilder(words[0]);
+        for(int i=1;i<words.length;i++){
+            if(vow(words[i])==v){
+                words[i] = new StringBuilder(words[i]).reverse().toString();
+            }
+            sb.append(" ").append(words[i]);
+        }
+        return sb.toString();
+    }
+}
