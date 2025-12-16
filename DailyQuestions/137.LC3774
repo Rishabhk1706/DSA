@@ -1,0 +1,18 @@
+https://leetcode.com/problems/absolute-difference-between-maximum-and-minimum-k-elements/description/  16-12-25
+
+class Solution {
+    public int absDifference(int[] nums, int k) {
+        Arrays.sort(nums);
+        int suml=0;
+        int sums=0;
+        for(int i=0;i<nums.length;i++){
+            if(i+1>k) break;
+            sums+=nums[i];
+        }
+        for(int i=nums.length-1;i>=0;i--){
+            if(nums.length-i>k) break;
+            suml+=nums[i];
+        }
+        return Math.abs(sums-suml);
+    }
+}
