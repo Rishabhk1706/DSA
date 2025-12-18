@@ -1,0 +1,35 @@
+https://leetcode.com/problems/minimum-amount-of-time-to-collect-garbage/ 18-12-25
+
+class Solution {
+    public int garbageCollection(String[] garbage, int[] travel) {
+        int glast=-1;
+        int plast=-1;
+        int mlast=-1;
+        int[] sub = new int[garbage.length];
+        int c=0;
+        for(int i=0;i<garbage.length;i++){
+            String s = garbage[i];
+            for(int j=0;j<s.length();j++){
+                char ch = s.charAt(j);
+                if(ch=='G'){
+                    c+=1;
+                    glast=i;
+                }else if(ch=='P'){
+                    c+=1;
+                    plast=i;
+                }
+                else{
+                    c+=1;
+                    mlast=i;
+                }
+            }
+            if(i>0){
+                sub[i] = sub[i-1]+travel[i-1];
+            }
+        }
+        if(glast!=-1) c+=sub[glast];
+        if(plast!=-1) c+=sub[plast];
+        if(mlast!=-1) c+=sub[mlast];
+        return c;
+    }
+}
