@@ -1,0 +1,10 @@
+https://leetcode.com/problems/minimum-number-of-operations-to-make-array-xor-equal-to-k/ 19-12-25
+
+class Solution {
+    public int minOperations(int[] nums, int k) {
+        for(int q:nums){
+            k^=q;
+        }
+        return Integer.bitCount(k);
+    }
+}
