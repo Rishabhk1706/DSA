@@ -1,4 +1,4 @@
-https://leetcode.com/problems/delete-columns-to-make-sorted-ii 21-12-25
+https://leetcode.com/problems/delete-columns-to-make-sorted-ii/description 21-12-25
 
 class Solution {
     public int minDeletionSize(String[] strs) {
