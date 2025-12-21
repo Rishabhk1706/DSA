@@ -1,0 +1,26 @@
+https://leetcode.com/problems/delete-columns-to-make-sorted-ii 21-12-25
+
+class Solution {
+    public int minDeletionSize(String[] strs) {
+        int c=0;
+        boolean[] sort = new boolean[strs.length-1];
+        for(int i=0;i<strs[0].length();i++){
+            boolean flag=false;
+            for(int j=0;j<strs.length-1;j++){
+                if(!sort[j] && strs[j].charAt(i)> strs[j+1].charAt(i)){
+                   flag=true;
+                   break;
+                }
+            }
+            if(flag) c++;
+            else{
+                for(int j=0;j<strs.length-1;j++){
+                    if(!sort[j] && strs[j].charAt(i) < strs[j+1].charAt(i)){
+                        sort[j]=true;
+                    }
+                }
+            }
+        }
+        return c;
+    }
+}
