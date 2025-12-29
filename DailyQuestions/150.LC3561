@@ -1,0 +1,21 @@
+https://leetcode.com/problems/resulting-string-after-adjacent-removals 29-12-25
+
+class Solution {
+    public String resultingString(String s) {
+        StringBuilder sb = new StringBuilder();
+        char[] ch = s.toCharArray();
+        sb.append(ch[0]);
+        for(int i=1;i<s.length();i++){
+            int val2 = (ch[i]==122) ? 97 : ch[i]+1;
+            int val1 = (ch[i]==97) ? 122 : ch[i]-1;
+            int n = sb.length();
+            if(n>0 && (sb.charAt(n-1)==val1 || sb.charAt(n-1)==val2)){
+                sb.deleteCharAt(n-1);
+            }
+            else{
+                sb.append(ch[i]);
+            }
+        }
+        return sb.toString();
+    }
+}
