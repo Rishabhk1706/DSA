@@ -1,0 +1,14 @@
+https://leetcode.com/problems/n-repeated-element-in-size-2n-array 02-01-26
+
+class Solution {
+    public int repeatedNTimes(int[] nums) {
+        Set<Integer> st = new HashSet<>();
+        for(int i:nums){
+            if(st.contains(i)){
+               return i; 
+            }
+            st.add(i);
+        }
+        return 0;
+    }
+}
