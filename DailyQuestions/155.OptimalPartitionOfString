@@ -1,0 +1,21 @@
+https://leetcode.com/problems/optimal-partition-of-string 03-01-26
+
+class Solution {
+    public int partitionString(String s) {
+        int[] f = new int[26];
+        int c=0,l=0;
+        while(l<s.length()){
+            char ch = s.charAt(l);
+            if(f[ch-'a']+1 > 1){
+                c++;
+                f = new int[26];
+            }
+            else{
+                f[ch-'a']++;
+                if(l==s.length()-1) c++;
+                l++;
+            }
+        }
+        return c;
+    }
+}
