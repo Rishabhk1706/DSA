@@ -1,0 +1,23 @@
+https://leetcode.com/problems/subarrays-with-k-different-integers/
+
+class Solution {
+    public static int subarrayatmostk(int n,int[] arr,int k){
+        int ans=0;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        int i=0;
+        for(int j=0;j<n;j++){
+            map.put(arr[j],map.getOrDefault(arr[j],0)+1);
+            while(map.size()>k){
+                map.put(arr[i],map.get(arr[i])-1);
+                if(map.get(arr[i])==0) map.remove(arr[i]);
+                i++;
+            }
+            ans+=(j-i+1);
+        }
+        return ans;
+    }
+    public int subarraysWithKDistinct(int[] nums, int k) {
+        int n = nums.length;
+        return subarrayatmostk(n,nums,k) - subarrayatmostk(n,nums,k-1);
+    }
+}
