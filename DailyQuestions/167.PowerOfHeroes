@@ -1,0 +1,16 @@
+https://leetcode.com/problems/power-of-heroes/ 15-01-26
+
+class Solution {
+    public int sumOfPower(int[] nums) {
+        Arrays.sort(nums);
+        long Mod = 1000000007;
+        long prefixSum=0;
+        long ans=0;
+        for(int i : nums){
+            long sq = (long) i*i % Mod;
+            ans = (ans + sq * (prefixSum + i) % Mod) % Mod;
+            prefixSum = (prefixSum*2 + i) % Mod;
+        }
+        return (int) ans;
+    }
+}
