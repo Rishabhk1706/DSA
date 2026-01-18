@@ -1,0 +1,42 @@
+https://leetcode.com/problems/minimum-operations-to-make-the-array-alternating/description/  18-01-26
+
+class Solution {
+    private int[][] helper(Map<Integer,Integer> map){
+        int[][] res = new int[2][2];
+        for(Map.Entry<Integer,Integer> e : map.entrySet()){
+            int val = e.getKey();
+            int cnt = e.getValue();
+            if(cnt>res[0][1]){
+                res[1][0] = res[0][0];
+                res[1][1] = res[0][1];
+                
+                res[0][0] = val;
+                res[0][1] = cnt;
+            } 
+            else if(cnt>res[1][1]){
+                res[1][0] = val;
+                res[1][1] = cnt;
+            }
+        }
+        return res;
+    }
+    public int minimumOperations(int[] nums) {
+        int n = nums.length;
+        Map<Integer,Integer> even = new HashMap<>();
+        Map<Integer,Integer> odd = new HashMap<>();
+        for(int i=0;i<n;i++){
+            if(i%2==0){
+                even.put(nums[i],even.getOrDefault(nums[i],0)+1);
+            }
+            else{
+                odd.put(nums[i],odd.getOrDefault(nums[i],0)+1);
+            }
+        }
+        int[][] evens = helper(even);
+        int[][] odds = helper(odd);
+        if(evens[0][0]!=odds[0][0]){
+            return n - (evens[0][1]+odds[0][1]);
+        }
+        return n - Math.max((evens[0][1]+odds[1][1]), (evens[1][1]+odds[0][1]));
+    }
+}
