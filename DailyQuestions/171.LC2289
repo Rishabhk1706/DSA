@@ -1,0 +1,27 @@
+https://leetcode.com/problems/steps-to-make-array-non-decreasing/ 19-01-26
+
+class Solution {
+    public class Pair{
+        int key;
+        int val;
+        public Pair(int key,int val){
+            this.key=key;
+            this.val=val;
+        }
+    }
+    public int totalSteps(int[] nums) {
+        int ans=0;
+        int n = nums.length;
+        Stack<Pair> st = new Stack<>();
+        for(int i=n-1;i>=0;i--){
+            int c=0;
+            while(!st.isEmpty() && nums[i]>st.peek().key){
+                c = Math.max(c+1,st.peek().val);
+                st.pop();
+            }
+            ans = Math.max(ans,c);
+            st.push(new Pair(nums[i],c));
+        }
+        return ans;
+    }
+}
