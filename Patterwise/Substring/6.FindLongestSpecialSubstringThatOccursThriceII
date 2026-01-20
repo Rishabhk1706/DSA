@@ -1,0 +1,26 @@
+https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-ii/ 
+
+class Solution {
+    public int maximumLength(String s) {
+        int[][] arr = new int[26][s.length()];
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            int j=i;
+            while(j<s.length() && ch==s.charAt(j)){
+                arr[ch-'a'][j-i]++;
+                j++;
+            }
+            i=j-1;
+        }
+        int res=-1;
+        for(int[] fre : arr){
+            int prev=0;
+            for(int i=s.length()-1;i>=0;i--){
+                fre[i]+=prev;
+                prev=fre[i];
+                if(prev>=3) res = Math.max(res,i+1);
+            }
+        }
+        return res;
+    }
+}
