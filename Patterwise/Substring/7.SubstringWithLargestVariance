@@ -1,0 +1,35 @@
+https://leetcode.com/problems/substring-with-largest-variance/description/ 21-01-26
+
+class Solution {
+    public int largestVariance(String s) {
+        HashSet<Character> set = new HashSet<>();
+        int ans=0;
+        for(char ch : s.toCharArray()){
+            set.add(ch);
+        }
+        int c1=0,c2=0;
+        for(int i=0;i<2;i++){
+            for(char l1 : set){
+                for(char l2 : set){
+                    if(l1==l2) continue;
+                    c1=0;
+                    c2=0;
+                    for(char ch : s.toCharArray()){
+                        if(ch==l1){
+                            c1++;
+                        }
+                        else if(ch==l2){
+                            c2++;
+                        }
+                        if(c1<c2){
+                            c1 = c2 = 0;
+                        }
+                        else if(c1>0 && c2>0) ans = Math.max(ans,c1-c2);
+                    }
+                }
+            }
+            s = new StringBuilder(s).reverse().toString();
+        }
+        return ans;
+    }
+}
