@@ -1,0 +1,23 @@
+https://leetcode.com/problems/maximum-frequency-after-subarray-operation/ 29-01-26
+
+class Solution {
+    public int maxFrequency(int[] nums, int k) {
+        int c=0;
+        for(int val : nums){
+            if(val==k) c++;
+        }
+        int ans=0;
+        for(int i=1;i<=50;i++){
+            if(i==k) continue;
+            int cur=0,maxi=0;
+            for(int v : nums){
+                if(v==i) cur++;
+                if(v==k) cur--;
+                cur = Math.max(cur,0);
+                maxi = Math.max(maxi,cur);
+            }
+            ans = Math.max(ans,maxi);
+        }
+        return ans+c;
+    }
+}
