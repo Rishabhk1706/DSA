@@ -1,0 +1,18 @@
+https://leetcode.com/problems/jump-game-vi/ 30-01-26
+
+class Solution {
+    public int maxResult(int[] nums, int k) {
+        int n = nums.length;
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> b[1]-a[1]);
+        int maxi=nums[0];
+        pq.offer(new int[]{0,maxi});
+        for(int i=1;i<n;i++){
+            while(!pq.isEmpty() && i-pq.peek()[0]>k){
+                pq.poll();
+            }
+            maxi = nums[i] + pq.peek()[1];
+            pq.offer(new int[]{i,maxi});
+        }
+        return maxi;
+    }
+}
