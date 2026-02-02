@@ -1,0 +1,26 @@
+https://leetcode.com/problems/interval-list-intersections 02-02-26
+
+class Solution {
+    public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
+        ArrayList<int[]> al = new ArrayList<>();
+        int i=0,j=0;
+        while(i<firstList.length && j<secondList.length){
+            int st1=firstList[i][0];
+            int nd1=firstList[i][1];
+
+            int st2=secondList[j][0];
+            int nd2=secondList[j][1];
+
+            int start = Math.max(st1,st2);
+            int end = Math.min(nd1,nd2);
+
+            if(start<=end){al.add(new int[]{start,end});}
+            if(nd1<nd2){
+                i++;
+            }
+            else j++;
+        }
+        int[][] arr = al.toArray(new int[al.size()][2]);
+        return arr;
+    }
+}
