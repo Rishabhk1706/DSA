@@ -1,0 +1,15 @@
+https://leetcode.com/problems/maximum-value-of-an-ordered-triplet-ii/description/ 06-02-26
+
+class Solution {
+    public long maximumTripletValue(int[] nums) {
+        long ans=0;
+        long diff=0;
+        long maxi=0;
+        for(int q : nums){
+            ans = Math.max(ans,(long) diff * q);
+            diff = Math.max(diff,maxi-q);
+            maxi = Math.max(maxi,q);
+        }
+        return ans;
+    }
+}
