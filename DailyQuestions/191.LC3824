@@ -1,0 +1,21 @@
+https://leetcode.com/problems/merge-adjacent-equal-elements/ 08-02-26
+
+class Solution {
+    public List<Long> mergeAdjacent(int[] nums) {
+        Stack<Long> st = new Stack<>();
+        for(int n : nums){
+            long val = (long) n;
+            while(!st.isEmpty() && st.peek()==val){
+                st.pop();
+                val*=2;
+            }
+            st.push(val);
+        }
+        List<Long> ans = new ArrayList<>();
+        while(!st.isEmpty()){
+            ans.add(st.pop());
+        }
+        Collections.reverse(ans);
+        return ans;
+    }
+}
