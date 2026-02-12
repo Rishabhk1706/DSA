@@ -1,0 +1,37 @@
+https://leetcode.com/problems/even-odd-tree/description/ 12-02-26
+
+class Solution {
+    public boolean isEvenOddTree(TreeNode root) {
+        if(root.val%2==0) return false;
+        Queue<TreeNode> pq = new LinkedList<>();
+        pq.add(root);
+        int level=0;
+        while(!pq.isEmpty()){
+            int n = pq.size();
+            while(n-->0){
+                TreeNode val = pq.poll();
+                if(val.left!=null) pq.add(val.left);
+                if(val.right!=null) pq.add(val.right);
+            }
+            level++;
+            int[] arr = new int[pq.size()];
+            int j=0;
+            for(TreeNode q : pq){
+                arr[j++] = q.val;
+            }
+            if(level%2==0 && pq.size()>0){
+                if(arr[0]%2==0) return false;
+                for(int i=1;i<arr.length;i++){
+                    if(arr[i]<=arr[i-1] || (arr[i]%2==0)) return false;
+                }
+            }
+            else if(level%2!=0 && pq.size()>0){
+                if(arr[0]%2!=0) return false;
+                for(int i=1;i<arr.length;i++){
+                    if(arr[i]>=arr[i-1] || (arr[i]%2!=0)) return false;
+                }
+            }
+        }
+        return true;
+    }
+}
