@@ -1,0 +1,18 @@
+https://leetcode.com/problems/score-of-parentheses/description 13-02-26
+
+class Solution {
+    public int scoreOfParentheses(String s) {
+        Stack<Integer> st = new Stack<>();
+        int c=0;
+        for(char ch : s.toCharArray()){
+            if(ch=='('){
+                st.push(c);
+                c=0;
+            }
+            else{
+                c = st.pop() + Math.max(2*c,1);
+            }
+        }
+        return c;
+    }
+}
