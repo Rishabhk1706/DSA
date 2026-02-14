@@ -1,0 +1,52 @@
+https://leetcode.com/problems/design-circular-deque/ 14-02
+
+class MyCircularDeque {
+    ArrayDeque<Integer> dq;
+    int k;
+    public MyCircularDeque(int m) {
+        dq = new ArrayDeque<>(k);
+        k=m;
+    }
+    
+    public boolean insertFront(int value) {
+        if(dq.size()==k) return false;
+        dq.addFirst(value);
+        return true;
+    }
+    
+    public boolean insertLast(int value) {
+        if(dq.size()==k) return false;
+        dq.addLast(value);
+        return true;
+    }
+    
+    public boolean deleteFront() {
+        if(dq.size()==0) return false;
+        dq.pollFirst();
+        return true;
+    }
+    
+    public boolean deleteLast() {
+        if(dq.size()==0) return false;
+        dq.pollLast();
+        return true;
+    }
+    
+    public int getFront() {
+        if(dq.size()==0) return -1;
+        return dq.peekFirst();
+    }
+    
+    public int getRear() {
+        if(dq.size()==0) return -1;
+        return dq.peekLast();
+    }
+    
+    public boolean isEmpty() {
+        return dq.isEmpty();
+    }
+    
+    public boolean isFull() {
+        return dq.size()==k;
+    }
+}
