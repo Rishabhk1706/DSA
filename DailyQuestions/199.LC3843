@@ -1,0 +1,18 @@
+https://leetcode.com/problems/first-element-with-unique-frequency/ 16-02-26
+
+class Solution {
+    public int firstUniqueFreq(int[] nums) {
+        HashMap<Integer,Integer> f = new HashMap<>();
+        for(int n : nums){
+            f.put(n, f.getOrDefault(n,0)+1);
+        }
+        HashMap<Integer,Integer> uni = new HashMap<>();
+        for(int n : f.values()){
+            uni.put(n, uni.getOrDefault(n,0)+1);
+        }
+        for(int n : nums){
+            if(uni.get(f.get(n)) == 1) return n;
+        }
+        return -1;
+    }
+}
