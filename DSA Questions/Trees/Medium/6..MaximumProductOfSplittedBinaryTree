@@ -1,0 +1,27 @@
+https://leetcode.com/problems/maximum-product-of-splitted-binary-tree/
+
+class Solution {
+    long total = 0;
+    long pro = 0;
+    int MOD = 1000000007;
+    public void inorder(TreeNode root){
+        if(root==null) return;
+        inorder(root.left);
+        total+=root.val;
+        inorder(root.right);
+    }
+    public long dfs(TreeNode root){
+        if(root == null) return 0;
+        long left = dfs(root.left);
+        long right = dfs(root.right);
+        long subtree = left + right + root.val;
+        long remain = total - subtree;
+        pro = Math.max(pro, subtree * remain);
+        return subtree;
+    }
+    public int maxProduct(TreeNode root) {
+        inorder(root);
+        dfs(root);
+        return (int) (pro%MOD);
+    }
+}
