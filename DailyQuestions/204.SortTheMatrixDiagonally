@@ -1,0 +1,42 @@
+https://leetcode.com/problems/sort-the-matrix-diagonally/ 21-02-26
+
+class Solution {
+    public void fill(int[][] ans, int i,int j, List<Integer> cur){
+        int n = ans.length;
+        int m = ans[0].length;
+        int ind=0;
+        while(i<n && j<m){
+            ans[i][j] = cur.get(ind++);
+            i++;
+            j++;
+        }
+    }
+    public void traverse(int[][] mat, int i,int j, List<Integer> cur){
+        int n = mat.length;
+        int m = mat[0].length;
+        while(i<n && j<m){
+            cur.add(mat[i][j]);
+            i++;
+            j++;
+        }
+    }
+    public int[][] diagonalSort(int[][] mat) {
+        int n = mat.length;
+        int m = mat[0].length;
+        int[][] ans = new int[n][m];
+        List<Integer> cur = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            traverse(mat,i,0,cur);
+            Collections.sort(cur);
+            fill(ans,i,0,cur);
+            cur = new ArrayList<>();
+        }
+        for(int j=1;j<m;j++){
+            traverse(mat,0,j,cur);
+            Collections.sort(cur);
+            fill(ans,0,j,cur);
+            cur = new ArrayList<>();
+        }
+        return ans;
+    }
+}
