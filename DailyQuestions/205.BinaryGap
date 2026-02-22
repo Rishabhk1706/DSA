@@ -1,0 +1,22 @@
+https://leetcode.com/problems/binary-gap/ 22-02-26
+
+class Solution {
+    public int binaryGap(int n) {
+        String s = Integer.toBinaryString(n);
+        int gap=0;
+        int i=-1,j=0;
+        while(j<s.length()){
+            if(s.charAt(j)=='1'){
+                if(i==-1){
+                    i=j;
+                }
+                else{
+                    gap = Math.max(gap,j-i);
+                    i=j;
+                }
+            }
+            j++;
+        }
+        return gap;
+    }
+}
