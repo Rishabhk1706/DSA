@@ -1,0 +1,14 @@
+https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k 23-02-26
+
+class Solution {
+    public boolean hasAllCodes(String s, int k) {
+        HashSet<String> set = new HashSet<>();
+        int i=0,j=k-1;
+        while(j<s.length()){
+            set.add(s.substring(i,j+1));
+            i++;
+            j++;
+        }
+        return (set.size() == ((int) Math.pow(2,k)));
+    }
+}
