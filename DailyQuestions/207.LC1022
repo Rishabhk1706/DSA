@@ -1,0 +1,18 @@
+https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers 24-02-26
+
+class Solution {
+    int total=0;
+    public void dfs(TreeNode root, int cur){
+        if(root == null) return;
+        cur = cur*2 + root.val;
+        dfs(root.left,cur);
+        dfs(root.right,cur);
+        if(root.left==null && root.right==null){
+            total+=cur;
+        }
+    }
+    public int sumRootToLeaf(TreeNode root) {
+        dfs(root,0);
+        return total;
+    }
+}
