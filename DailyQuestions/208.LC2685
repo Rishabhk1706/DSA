@@ -1,0 +1,41 @@
+https://leetcode.com/problems/count-the-number-of-complete-components/ 25-02-26
+
+class Solution {
+    public int countCompleteComponents(int n, int[][] edges) {
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            graph.add(new ArrayList<>());
+        }
+        for(int[] e : edges){
+            graph.get(e[0]).add(e[1]);
+            graph.get(e[1]).add(e[0]);
+        }
+        boolean[] vis = new boolean[n];
+        int cc = 0;
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                int[] res = dfs(i,graph,vis);
+                int nodes = res[0];
+                int edge = res[1]/2;
+                if(edge == (nodes*(nodes-1)/2)){
+                    cc++;
+                }
+            }
+        }
+        return cc;
+    }
+
+    public int[] dfs(int node,ArrayList<ArrayList<Integer>> graph,boolean[] vis){
+        vis[node] = true;
+        int nodes = 1;
+        int edges = graph.get(node).size();
+        for(int nbr : graph.get(node)){
+            if(!vis[nbr]){
+                int[] res = dfs(nbr, graph, vis);
+                nodes += res[0];
+                edges += res[1];
+            }
+        }
+        return new int[]{nodes, edges};
+    }
+}
