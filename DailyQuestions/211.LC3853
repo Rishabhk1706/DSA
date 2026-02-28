@@ -1,0 +1,25 @@
+https://leetcode.com/problems/merge-close-characters/ 28-02-26
+
+class Solution {
+    public String mergeCharacters(String s, int k) {
+        StringBuilder sb = new StringBuilder(s);
+        int[] f = new int[26];
+        Arrays.fill(f,-1);
+        int i=0;
+        while(i<sb.length()){
+            char ch = sb.charAt(i);
+            if(f[ch-'a']==-1){
+                f[ch-'a']=i;
+                i++;
+            }
+            else if(i-f[ch-'a']<=k){
+                sb.deleteCharAt(i);
+            }
+            else{
+                f[ch-'a']=i;
+                i++;
+            }
+        }
+        return sb.toString();
+    }
+}
