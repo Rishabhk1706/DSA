@@ -1,0 +1,15 @@
+https://leetcode.com/problems/minimum-cost-to-split-into-ones/description/ 01-03-26
+
+class Solution {
+    public int minCost(int n) {
+        int cost=0;
+        int ones=n;
+        while(ones>0){
+            cost += (n-1);
+            n--;
+            ones--;
+            if(n==1) ones--;
+        }
+        return cost;
+    }
+}
