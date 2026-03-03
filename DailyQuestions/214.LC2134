@@ -1,0 +1,24 @@
+https://leetcode.com/problems/minimum-swaps-to-group-all-1s-together-ii/description 03-03-26
+
+class Solution {
+    public int minSwaps(int[] nums) {
+        int n = nums.length;
+        int tot1 = 0;
+        for(int num : nums){
+            tot1+=num;
+        }
+        if(tot1==0 || tot1==n) return 0;
+        int curr1 = 0;
+        int max1 = 0;
+        for(int i=0;i<tot1;i++){
+            curr1+=nums[i];
+        }
+        max1 = curr1;
+        for(int i=tot1; i<n+tot1 ;i++){
+            curr1+=nums[i % n];
+            curr1-=nums[(i-tot1)%n];
+            max1 = Math.max(max1, curr1);
+        }
+        return tot1- max1;
+    }
+}
