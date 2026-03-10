@@ -1,0 +1,23 @@
+https://leetcode.com/problems/string-compression/ 10-03-26
+
+class Solution {
+    public int compress(char[] chars) {
+        int ind=0;
+        int i=0;
+        while(i<chars.length){
+            char cur=chars[i];
+            int c=0;
+            while(i<chars.length && chars[i]==cur){
+                i++;
+                c++;
+            }
+            chars[ind++] = cur;
+            if(c>1){
+                for(char ch : String.valueOf(c).toCharArray()){
+                    chars[ind++] = ch;
+                }
+            }
+        }
+        return ind;
+    }
+}
