@@ -1,0 +1,22 @@
+https://leetcode.com/problems/convert-bst-to-greater-tree/ 13-03-26
+
+class Solution {
+    int ans=Integer.MIN_VALUE;
+    public void inorder(TreeNode root){
+        if(root==null) return;
+        inorder(root.right);
+        if(ans==Integer.MIN_VALUE){
+            ans = root.val;
+        }
+        else{
+            ans += root.val;
+            root.val = ans;
+        }
+        inorder(root.left);
+    }
+    public TreeNode convertBST(TreeNode root) {
+        if(root==null) return null;
+        inorder(root);
+        return root;
+    }
+}
