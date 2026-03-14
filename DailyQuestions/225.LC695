@@ -1,0 +1,31 @@
+https://leetcode.com/problems/max-area-of-island/description/ 14-03-26
+
+class Solution {
+    int maxVal=0;
+    int curr=0;
+    public void dfs(int i,int j,int n,int m,boolean[][] vis,int[][] grid){
+        if(i<0 || i>=n || j<0 || j>=m || vis[i][j] || grid[i][j]==0) return;
+        vis[i][j] = true;
+        curr++;
+        int[] dr = {0,1,0,-1};
+        int[] dc = {1,0,-1,0};
+        for(int k=0;k<4;k++){
+            dfs(i+dr[k],j+dc[k],n,m,vis,grid);
+        }
+    }
+    public int maxAreaOfIsland(int[][] grid) {
+        int n = grid.length;
+        int m = grid[0].length;
+        boolean[][] vis = new boolean[n][m];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(!vis[i][j] && grid[i][j]==1){
+                    dfs(i,j,n,m,vis,grid);
+                    maxVal = Math.max(maxVal,curr);
+                    curr=0;
+                }
+            }
+        }
+        return maxVal;
+    }
+}
