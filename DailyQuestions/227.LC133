@@ -1,0 +1,17 @@
+https://leetcode.com/problems/clone-graph/ 16-03-26
+
+class Solution {
+    HashMap<Node,Node> map = new HashMap<>();
+    public Node cloneGraph(Node node) {
+        if(node==null) return null;
+        if(map.containsKey(node)){
+            return map.get(node);
+        }
+        Node clone = new Node(node.val);
+        map.put(node,clone);
+        for(Node e : node.neighbors){
+            clone.neighbors.add(cloneGraph(e));
+        }
+        return clone;
+    }
+}
