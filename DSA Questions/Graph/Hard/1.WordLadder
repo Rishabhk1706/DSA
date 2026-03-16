@@ -1,0 +1,39 @@
+https://leetcode.com/problems/word-ladder/description/
+
+class Pair{
+    String s;
+    int steps;
+    public Pair(String s, int steps){
+        this.s = s;
+        this.steps = steps;
+    }
+}
+class Solution {
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        Set<String> set = new HashSet<>();
+        for(String s : wordList){
+            set.add(s);
+        }
+        Queue<Pair> q = new LinkedList<>();
+        q.add(new Pair(beginWord,1));
+        set.remove(beginWord);
+        while(!q.isEmpty()){
+            Pair cur = q.poll();
+            if(cur.s==endWord) return cur.steps;
+            char[] word = cur.s.toCharArray();
+            for(int i=0;i<cur.s.length();i++){
+                char original = word[i];
+                for(char ch='a';ch<='z';ch++){
+                    word[i] = ch;
+                    String newWord = new String(word);
+                    if(set.contains(newWord)){
+                        set.remove(newWord);
+                        q.add(new Pair(newWord,cur.steps+1));
+                    }
+                }
+                word[i] = original;
+            }
+        }
+        return 0;
+    }
+}
