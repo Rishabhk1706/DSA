@@ -1,0 +1,38 @@
+https://leetcode.com/problems/minimum-absolute-difference-in-sliding-submatrix 20-03-26
+
+class Solution {
+    public int helper(int n,int m,int i,int j,int[][] grid,int k){
+        TreeSet<Integer> set = new TreeSet<>();
+        for(int a=i;a<i+k;a++){
+            for(int b=j;b<j+k;b++){
+                set.add(grid[a][b]);
+            }
+        }
+        int diff=Integer.MAX_VALUE;
+        int prev=-1000000;
+        for(int v : set){
+            if(prev==-1000000){
+                prev=v;
+            }
+            else{
+                diff = Math.min(diff, Math.abs(v-prev));
+                prev=v;
+            }
+            System.out.print(v+" ");
+        }
+        return diff==Integer.MAX_VALUE ? 0 : diff;
+    }
+    public int[][] minAbsDiff(int[][] grid, int k) {
+        int n = grid.length;
+        int m = grid[0].length;
+        int n1 = n-k+1;
+        int m1 = m-k+1;
+        int[][] ans = new int[n1][m1];
+        for(int i=0;i<n1;i++){
+            for(int j=0;j<m1;j++){
+                ans[i][j] = helper(n,m,i,j,grid,k);
+            }
+        }
+        return ans;
+    }
+}
