@@ -1,0 +1,22 @@
+https://leetcode.com/problems/construct-uniform-parity-array-ii/ 23-03-26
+
+class Solution {
+    public boolean uniformArray(int[] nums1) {
+        int n = nums1.length;
+        int ce=0;
+        int co=0;
+        int mini = Integer.MAX_VALUE;
+        for(int nu : nums1){
+            if(nu%2==0){
+                ce++;
+            }
+            else co++;
+            mini = Math.min(mini,nu);
+        }
+        if(n==ce || n==co){
+            return true;
+        }
+        if(mini%2==0) return false;
+        return true;
+    }
+}
