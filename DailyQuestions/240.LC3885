@@ -1,0 +1,35 @@
+https://leetcode.com/problems/design-event-manager/ 29-03-26
+
+class EventManager {
+    HashMap<Integer,Integer> map;
+    PriorityQueue<int[]> pq;
+    public EventManager(int[][] events) {
+        map = new HashMap<>();
+        pq = new PriorityQueue<>((a,b) -> {
+            if(a[0]==b[0]) return a[1]-b[1];
+            return b[0]-a[0];
+        });
+        for(int[] v : events){
+            map.put(v[0],v[1]);
+            pq.offer(new int[]{v[1],v[0]});
+        }
+    }
+    
+    public void updatePriority(int eventId, int newPriority) {
+        map.put(eventId,newPriority);
+        pq.add(new int[]{newPriority,eventId});
+    }
+    
+    public int pollHighest() {
+        while(!pq.isEmpty()){
+            int[] cur = pq.poll();
+            int id = cur[1];
+            int pri = cur[0];
+            if(map.containsKey(id) && map.get(id)==pri){
+                map.remove(id);
+                return id;
+            }
+        }
+        return -1;
+    }
+}
