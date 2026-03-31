@@ -1,0 +1,21 @@
+https://leetcode.com/problems/longest-zigzag-path-in-a-binary-tree/ 31-03-26
+
+class Solution {
+    int maxi=0;
+    public void dfs(TreeNode root,int steps,boolean left){
+        if(root==null) return;
+        maxi = Math.max(maxi,steps);
+        if(left){
+            dfs(root.left,1,true);
+            dfs(root.right,steps+1,false);
+        }
+        else{
+            dfs(root.left,steps+1,true);
+            dfs(root.right,1,false);
+        }
+    }
+    public int longestZigZag(TreeNode root) {
+        dfs(root,0,true);
+        return maxi;
+    }
+}
