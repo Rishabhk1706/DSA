@@ -1,0 +1,19 @@
+https://leetcode.com/problems/house-robber-iii/description/
+
+class Solution {
+    public int[] dfs(TreeNode root){
+        if(root==null) return new int[2];
+        int[] left = dfs(root.left);
+        int[] right = dfs(root.right);
+        int[] cur = new int[2];
+        //node take + (left right not take);
+        cur[1] = root.val + left[0] + right[0];
+        //node not take (max from left child + max from right child);
+        cur[0] = Math.max(left[0],left[1]) + Math.max(right[0],right[1]);
+        return cur;
+    }
+    public int rob(TreeNode root) {
+        int[] ans = dfs(root);
+        return Math.max(ans[0],ans[1]);
+    }
+}
