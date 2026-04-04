@@ -1,0 +1,24 @@
+https://leetcode.com/problems/decode-the-slanted-ciphertext 04-04-26
+
+class Solution {
+    public String decodeCiphertext(String encodedText, int rows) {
+        int cols = encodedText.length()/rows;
+        char[][] grid = new char[rows][cols];
+        int ind=0;
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                grid[i][j] = encodedText.charAt(ind++);
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for(int j=0;j<cols;j++){
+            int i=0,k=j;
+            while(i<rows && k<cols){
+                sb.append(grid[i][k]);
+                i++;
+                k++;
+            }
+        }
+        return sb.toString().stripTrailing();
+    }
+}
