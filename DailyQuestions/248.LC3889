@@ -1,0 +1,28 @@
+https://leetcode.com/problems/mirror-frequency-distance/ 06-04-26
+
+class Solution {
+    public int mirrorFrequency(String s) {
+        HashSet<Character> set = new HashSet<>();
+        int ans=0;
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(char ch : s.toCharArray()){
+            map.put(ch,map.getOrDefault(ch,0)+1);
+        }
+        for(char ch : s.toCharArray()){
+            if(set.contains(ch)) continue;
+            char nxt = '.';
+            if(ch>='a' && ch<='z'){
+                int val = ch-'a';
+                nxt = (char) ('z'-val);
+            }
+            else{
+                int val = ch-'0';
+                nxt = (char) ('9'-val);
+            }
+            ans+=Math.abs(map.getOrDefault(ch,0) - map.getOrDefault(nxt,0));
+            set.add(ch);
+            set.add(nxt);
+        }
+        return ans;
+    }
+}
