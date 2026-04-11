@@ -1,0 +1,19 @@
+https://leetcode.com/problems/count-digit-appearances/ 11-04-26
+
+class Solution {
+    public int countDigitOccurrences(int[] nums, int digit) {
+        int c=0;
+        for(int val : nums){
+            if(val==0 && digit==0){
+                c++;
+                continue;
+            }
+            while(val>0){
+                int d = val%10;
+                val = val/10;
+                if(d==digit) c++;
+            }
+        }
+        return c;
+    }
+}
