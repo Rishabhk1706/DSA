@@ -1,0 +1,28 @@
+https://leetcode.com/problems/minimum-time-to-make-rope-colorful  13-04-26
+
+class Solution {
+    public int minCost(String colors, int[] t) {
+        char[] color = colors.toCharArray();
+        int total=0;
+        int cur = t[0];
+        int sum = t[0];
+        boolean f = false;
+        for(int i=1;i<color.length;i++){
+            if(color[i]==color[i-1]){
+                f = true;
+                sum += t[i];
+                cur = Math.max(cur,t[i]);
+            }
+            else{
+                if(f){
+                    total+=(sum-cur);
+                    f=false;
+                }
+                cur=t[i];
+                sum=t[i];
+            }
+        }
+        if(f) total+=(sum-cur);
+        return total;
+    }
+}
