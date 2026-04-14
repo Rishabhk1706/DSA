@@ -1,0 +1,53 @@
+https://leetcode.com/problems/maximum-score-from-removing-substrings 14-04-26
+
+class Solution {
+    public int maximumGain(String s, int x, int y) {
+        char p='a';
+        char q='b';
+        char n='b';
+        char m='a';
+        int val = x;
+        int val2 = y;
+        if(x<y){
+            p = 'b';
+            q = 'a';
+            n = 'a';
+            m = 'b';
+            val = y;
+            val2 = x;
+        }
+        int total = 0;
+        StringBuilder sb = new StringBuilder();
+        for(char ch : s.toCharArray()){
+            if(sb.length()==0){
+                sb.append(ch);
+            }
+            else{
+                if(sb.charAt(sb.length()-1)==p && ch==q){
+                    sb.deleteCharAt(sb.length()-1);
+                    total+=val;
+                }
+                else{
+                    sb.append(ch);
+                }
+            }
+        }
+        String nn = sb.toString();
+        sb = new StringBuilder();
+        for(char ch : nn.toCharArray()){
+            if(sb.length()==0){
+                sb.append(ch);
+            }
+            else{
+                if(sb.charAt(sb.length()-1)==n && ch==m){
+                    sb.deleteCharAt(sb.length()-1);
+                    total+=val2;
+                }
+                else{
+                    sb.append(ch);
+                }
+            }
+        }
+        return total;
+    }
+}
