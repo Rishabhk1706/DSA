@@ -1,0 +1,23 @@
+https://leetcode.com/problems/reduce-array-size-to-the-half 16-04-26
+
+class Solution {
+    public int minSetSize(int[] arr) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int j : arr){
+            map.put(j,map.getOrDefault(j,0)+1);
+        }
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> b[1]-a[1]);
+        int total = arr.length;
+        for(int e : map.keySet()){
+            pq.add(new int[]{e,map.get(e)});
+        }
+        int c=0;
+        while(!pq.isEmpty()){
+            int[] cur = pq.poll();
+            c++;
+            total-=cur[1];
+            if(total<=arr.length/2) break;
+        }
+        return c;
+    }
+}
