@@ -1,0 +1,27 @@
+https://leetcode.com/problems/words-within-two-edits-of-dictionary/description 22-04-26
+
+class Solution {
+    public boolean diff(String word1, String word2){
+        int c=0;
+        for(int i=0;i<word1.length();i++){
+            if(word1.charAt(i)!=word2.charAt(i)){
+                c++;
+            }
+        }
+        return c<3;
+    }
+    public List<String> twoEditWords(String[] queries, String[] dictionary) {
+        List<String> al = new ArrayList<>();
+        for(String w : queries){
+            boolean f=false;
+            for(String s : dictionary){
+                if(diff(w,s)){
+                    f=true;
+                    break;
+                }
+            }
+            if(f) al.add(w);
+        }
+        return al;
+    }
+}
