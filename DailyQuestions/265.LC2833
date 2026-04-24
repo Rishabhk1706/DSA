@@ -1,0 +1,17 @@
+https://leetcode.com/problems/furthest-point-from-origin 24-04-26
+
+class Solution {
+    public int furthestDistanceFromOrigin(String moves) {
+        int l=0;
+        int r=0;
+        int sp=0;
+        for(char ch: moves.toCharArray()){
+            if(ch=='L') l++;
+            else if(ch=='R') r++;
+            else sp++;
+        }
+        if(l==r) return sp;
+        if(l>r) return (l-r+sp);
+        return (r-l+sp);
+    }
+}
