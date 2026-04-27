@@ -1,0 +1,16 @@
+https://leetcode.com/problems/minimum-operations-to-make-array-non-decreasing/ 27-04-26
+
+class Solution {
+    public long minOperations(int[] nums) {
+        int i=1;
+        int n=nums.length;
+        long ans=0;
+        while(i<n){
+            if(nums[i-1]>nums[i]){
+                ans += nums[i-1]-nums[i];
+            }
+            i++;
+        }
+        return ans;
+    }
+}
