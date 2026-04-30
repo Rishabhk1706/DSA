@@ -1,0 +1,31 @@
+https://leetcode.com/problems/find-the-minimum-area-to-cover-all-ones-i 30-04-26
+
+class Solution {
+    public int minimumArea(int[][] grid) {
+        int start_r = -1;
+        int start_c = -1;
+        int last_r = -1;
+        int last_c = -1;
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]==1){
+                    if(start_r==-1 && start_c==-1){
+                        start_r=i;
+                        start_c=j;
+                        last_r=i;
+                        last_c=j;
+                    }
+                    else{
+                        if(last_r<i) last_r=i;
+                        if(last_c<j) last_c=j;
+                        if(start_r>i) start_r=i;
+                        if(start_c>j) start_c=j;
+                    }
+                }
+            }
+        }
+        int ro = last_r-start_r+1;
+        int co = last_c-start_c+1;
+        return ro*co;
+    }
+}
