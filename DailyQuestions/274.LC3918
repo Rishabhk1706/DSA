@@ -1,0 +1,35 @@
+https://leetcode.com/problems/sum-of-primes-between-number-and-its-reverse/ 03-05-26
+
+class Solution {
+    public int countPrimes(int n) {
+        if(n<2) return 0;
+        boolean[] bool = new boolean[n];
+        Arrays.fill(bool,true);
+        bool[0]=false;
+        bool[1]=false;
+        int r = (int) Math.sqrt(n);
+        for(int i=2;i<=r;i++){
+            if(bool[i]){
+                for(int j=i*i;j<n;j+=i){
+                    bool[j]=false;
+                }
+            }
+        }
+        int c=0;
+        for(int i=0;i<n;i++){
+            if(bool[i]){
+                c+=i;
+            }
+        }
+        return c;
+    }
+    public int sumOfPrimesInRange(int n) {
+        int ans=0;
+        int r = n;
+        while(n>0){
+            ans = ans*10 + n%10;
+            n=n/10;
+        }
+        return (countPrimes(Math.max(r,ans)+1) - countPrimes(Math.min(r,ans)));
+    }
+}
