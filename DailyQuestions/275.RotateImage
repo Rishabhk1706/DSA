@@ -1,0 +1,29 @@
+https://leetcode.com/problems/rotate-image 04-05-26
+
+class Solution {
+    private void reverseRow(int[] row) {
+        int left = 0, right = row.length - 1;
+        while (left < right) {
+            int temp = row[left];
+            row[left] = row[right];
+            row[right] = temp;
+            left++;
+            right--;
+        }
+    }
+    public void rotate(int[][] matrix) {
+        int[][] B = new int[matrix.length][matrix.length];
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix.length;j++){
+                B[i][j]=matrix[j][i];
+            }
+        }
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix.length;j++){
+                matrix[i][j]=B[i][j];
+            }
+            reverseRow(matrix[i]);
+        }
+        
+    }
+}
