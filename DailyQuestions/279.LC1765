@@ -1,0 +1,43 @@
+https://leetcode.com/problems/map-of-highest-peak/ 08-05-26
+
+class Pair{
+    int x;
+    int y;
+    public Pair(int x,int y){
+        this.x = x;
+        this.y = y;
+    }
+}
+class Solution {
+    public int[][] highestPeak(int[][] isWater) {
+        int n = isWater.length;
+        int m = isWater[0].length;
+        int[][] ans = new int[n][m];
+        Queue<Pair> q = new ArrayDeque<>();
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(isWater[i][j]==1){
+                    q.offer(new Pair(i,j));
+                    ans[i][j]=0;
+                }
+                else{
+                    ans[i][j]=-1;
+                }
+            }
+        }
+        int[] dr = {0,1,0,-1};
+        int[] dc = {1,0,-1,0};
+        while(!q.isEmpty()){
+            Pair cur = q.poll();
+            for(int i=0;i<4;i++){
+                int nr = cur.x+dr[i];
+                int nc = cur.y+dc[i];
+                if(nr>=0 && nr<n && nc>=0 && nc<m && ans[nr][nc]==-1){
+                    ans[nr][nc] = ans[cur.x][cur.y]+1;
+                    q.add(new Pair(nr,nc));
+                }
+            }
+        }
+        return ans;
+    }
+}
