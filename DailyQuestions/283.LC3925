@@ -1,0 +1,12 @@
+https://leetcode.com/problems/concatenate-array-with-reverse/description/ 12-05-26
+
+class Solution {
+    public int[] concatWithReverse(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[2*n];
+        for(int i=0;i<2*n;i++){
+            ans[i] = (i<n) ? nums[i] : nums[n-1-(i%n)];
+        }
+        return ans;
+    }
+}
