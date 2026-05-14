@@ -1,0 +1,21 @@
+https://leetcode.com/problems/check-if-array-is-good/description 14-05-26
+
+class Solution {
+    public boolean isGood(int[] nums) {
+        int maxi=0;
+        for(int j : nums){
+            maxi = Math.max(maxi,j);
+        }
+        int[] f = new int[maxi+1];
+        for(int j : nums){
+            f[j]++;
+        }
+        boolean flag=true;
+        for(int i=1;i<=maxi;i++){
+            if((i<maxi && f[i]!=1) || (i==maxi && f[maxi]!=2)){
+                flag=false;
+            }
+        }
+        return flag;
+    }
+}
