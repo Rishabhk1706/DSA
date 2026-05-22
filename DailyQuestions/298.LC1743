@@ -1,0 +1,32 @@
+https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/ 22-05-26
+
+class Solution {
+    public int[] restoreArray(int[][] adjacentPairs) {
+        HashMap<Integer,List<Integer>> map = new HashMap<>();
+        for(int[] p : adjacentPairs){
+            if(!map.containsKey(p[0])) map.put(p[0],new ArrayList<>());
+            if(!map.containsKey(p[1])) map.put(p[1],new ArrayList<>());
+            map.get(p[0]).add(p[1]);
+            map.get(p[1]).add(p[0]);
+        }
+        int[] ans = new int[map.size()];
+        for(int val : map.keySet()){
+            if(map.get(val).size()==1){
+                ans[0] = val;
+                break;
+            }
+        }
+        HashSet<Integer> vis = new HashSet<>();
+        vis.add(ans[0]);
+        int j=0;
+        while(j<ans.length-1){
+            for(int val : map.get(ans[j])){
+                if(map.containsKey(val)){
+                    ans[++j] = val;
+                }
+            }
+            map.remove(ans[j-1]);
+        }
+        return ans;
+    }
+}
