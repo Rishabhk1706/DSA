@@ -1,0 +1,27 @@
+https://leetcode.com/problems/sum-of-even-numbers-after-queries 25-05-26
+
+class Solution {
+    public int[] sumEvenAfterQueries(int[] nums, int[][] queries) {
+        int sum=0;
+        for(int j : nums){
+            if(j%2==0){
+                sum+=j;
+            }
+        }
+        int[] ans = new int[queries.length];
+        int ind=0;
+        for(int[] q : queries){
+            int val = q[0];
+            int idx = q[1];
+            if(nums[idx]%2==0){
+                sum-=nums[idx];
+            }
+            nums[idx] += val;
+            if(nums[idx]%2==0){
+                sum+=nums[idx];
+            }
+            ans[ind++] = sum;
+        }
+        return ans;
+    }
+}
