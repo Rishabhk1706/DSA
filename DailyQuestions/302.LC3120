@@ -1,0 +1,17 @@
+https://leetcode.com/problems/count-the-number-of-special-characters-i 26-05-26
+
+class Solution {
+    public int numberOfSpecialChars(String s) {
+        HashSet<Character> set = new HashSet<>();
+        for(char ch : s.toCharArray()){
+            set.add(ch);
+        }
+        int c=0;
+        for(char ch : set){
+            if(ch>='a' && ch<='z' && set.contains(Character.toUpperCase(ch))){
+                c++;
+            }
+        }
+        return c;
+    }
+}
