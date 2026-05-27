@@ -1,0 +1,24 @@
+https://leetcode.com/problems/count-the-number-of-special-characters-ii/ 27-05-26
+
+class Solution {
+    public int numberOfSpecialChars(String s) {
+        int[] l = new int[26];
+        int[] u = new int[26];
+        Arrays.fill(l,-1);
+        Arrays.fill(u,-1);
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            if(Character.isLowerCase(ch)){
+                l[ch-'a'] = i;
+            }
+            else if(u[ch-'A']==-1){
+                u[ch-'A'] = i;
+            }
+        }
+        int c=0;
+        for(int i=0;i<26;i++){
+            if(l[i]!=-1 && u[i]!=-1 && l[i] < u[i]) c++;
+        }
+        return c;
+    }
+}
