@@ -1,0 +1,16 @@
+https://leetcode.com/problems/minimum-element-after-replacement-with-digit-sum 29-05-26
+
+class Solution {
+    public int minElement(int[] nums) {
+        int mini = Integer.MAX_VALUE;
+        for(int val : nums){
+            int sum=0;
+            while(val>0){
+                sum+=val%10;
+                val=val/10;
+            }
+            mini = Math.min(mini,sum);
+        }
+        return mini;
+    }
+}
