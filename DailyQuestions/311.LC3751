@@ -1,0 +1,26 @@
+https://leetcode.com/problems/total-waviness-of-numbers-in-range-i 04-06-26
+
+class Solution {
+    public static int wave(int n){
+        String str = String.valueOf(n);
+        if(str.length()<3){
+            return 0;
+        }
+        int ans=0;
+        for(int i=0;i<str.length()-2;i++){
+            int first = str.charAt(i);
+            int sec = str.charAt(i+1);
+            int thir = str.charAt(i+2);
+            if(sec>first && sec>thir) ans++;
+            if(sec<first && sec<thir) ans++;
+        }
+        return ans;
+    }
+    public int totalWaviness(int num1, int num2) {
+        int total=0;
+        for(int i=num1;i<=num2;i++){
+            total+=wave(i);
+        }
+        return total;
+    }
+}
