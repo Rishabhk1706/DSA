@@ -1,4 +1,4 @@
-https://leetcode.com/problems/restore-finishing-order/ 05-05-26
+https://leetcode.com/problems/restore-finishing-order/ 05-06-26
 
 class Solution {
     public int[] recoverOrder(int[] order, int[] friends) {
