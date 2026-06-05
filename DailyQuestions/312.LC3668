@@ -1,0 +1,18 @@
+https://leetcode.com/problems/restore-finishing-order/ 05-05-26
+
+class Solution {
+    public int[] recoverOrder(int[] order, int[] friends) {
+        HashSet<Integer> set = new HashSet<>();
+        for(int k : friends){
+            set.add(k);
+        }
+        int[] ans = new int[friends.length];
+        int j=0;
+        for(int a : order){
+            if(set.contains(a)){
+                ans[j++] = a;
+            }
+        }
+        return ans;
+    }
+}
