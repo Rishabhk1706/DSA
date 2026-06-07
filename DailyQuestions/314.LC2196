@@ -1,0 +1,31 @@
+https://leetcode.com/problems/create-binary-tree-from-descriptions 07-06-26
+
+class Solution {
+    public TreeNode createBinaryTree(int[][] descriptions) {
+        HashMap<Integer,TreeNode> map = new HashMap<>();
+        HashSet<TreeNode> set = new HashSet<>();
+        for(int[] i: descriptions){
+            if(!map.containsKey(i[0])){
+                map.put(i[0],new TreeNode(i[0]));
+            }
+            TreeNode parent = map.get(i[0]);
+            if(!map.containsKey(i[1])){
+                map.put(i[1],new TreeNode(i[1]));
+            }
+            TreeNode child = map.get(i[1]);
+            if(i[2]==1){
+                parent.left = child;
+            }
+            else{
+                parent.right = child;
+            }
+            set.add(child);
+        }
+        for(TreeNode i : map.values()){
+            if(!set.contains(i)){
+                return i;
+            }
+        }
+        return null;
+    }
+}
