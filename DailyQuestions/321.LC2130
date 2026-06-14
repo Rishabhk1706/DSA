@@ -1,0 +1,35 @@
+https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list 14-06-26
+
+class Solution {
+    public ListNode rev(ListNode head){
+        ListNode cur = null;
+        ListNode ptr = head;
+        while(ptr!=null){
+            ListNode next = ptr.next;
+            ptr.next = cur;
+            cur = ptr;
+            ptr = next;
+        }
+        return cur;
+    }
+    public int pairSum(ListNode head) {
+        ListNode prev = head;
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast!=null && fast.next!=null){
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        prev.next = rev(slow);
+        fast = prev.next;
+        slow = head;
+        int maxi = 0;
+        while(fast!=null){
+            maxi = Math.max(maxi,slow.val+fast.val);
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return maxi;
+    }
+}
