@@ -1,0 +1,29 @@
+https://leetcode.com/problems/watering-plants-ii/ 19-06-26
+
+class Solution {
+    public int minimumRefill(int[] plants, int alice, int bob) {
+        int alcur = alice;
+        int bobcur = bob;
+        int i=0;
+        int j = plants.length-1;
+        int fill=0;
+        while(i<j){
+            if(plants[i]>alcur){
+                alcur = alice;
+                fill++;
+            }
+            alcur-=plants[i++];
+            if(plants[j]>bobcur){
+                bobcur = bob;
+                fill++;
+            }
+            bobcur-=plants[j--];
+        }
+        if(i==j){
+            if(Math.max(alcur,bobcur)<plants[i]){
+                fill++;
+            }
+        }
+        return fill;
+    }
+}
