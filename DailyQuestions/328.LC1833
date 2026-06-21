@@ -1,0 +1,14 @@
+https://leetcode.com/problems/maximum-ice-cream-bars/description/ 21-06-26
+
+class Solution {
+    public int maxIceCream(int[] costs, int coins) {
+        Arrays.sort(costs);
+        int c=0;
+        for(int ice : costs){
+            if(ice > coins) break;
+            coins-=ice;
+            c++;
+        }
+        return c;
+    }
+}
