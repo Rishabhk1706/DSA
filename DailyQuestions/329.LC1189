@@ -1,0 +1,21 @@
+https://leetcode.com/problems/maximum-number-of-balloons/description 22-06-26
+
+class Solution {
+    public int maxNumberOfBalloons(String text) {
+        int[] freq = new int[5];
+        for(char ch : text.toCharArray()){
+            if(ch=='a') freq[0]++;
+            else if(ch=='b') freq[1]++;
+            else if(ch=='l') freq[2]++;
+            else if(ch=='o') freq[3]++;
+            else if(ch=='n') freq[4]++;
+        }
+        int mini = Integer.MAX_VALUE;
+        mini = Math.min(mini,freq[0]);
+        mini = Math.min(mini,freq[1]);
+        mini = Math.min(mini,freq[2]/2);
+        mini = Math.min(mini,freq[3]/2);
+        mini = Math.min(mini,freq[4]);
+        return mini;
+    }
+}
