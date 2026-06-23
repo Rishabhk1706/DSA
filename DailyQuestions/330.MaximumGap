@@ -1,0 +1,34 @@
+https://leetcode.com/problems/maximum-gap/description/ 23-06-26
+
+class Solution {
+    public int maximumGap(int[] nums) {
+        int n = nums.length;
+        if(n<2) return 0;
+        int mini = Integer.MAX_VALUE;
+        int maxi = Integer.MIN_VALUE;
+        for(int val : nums){
+            maxi = Math.max(val,maxi);
+            mini = Math.min(val,mini);
+        }
+        if(maxi==mini) return 0;
+        int bucketSize = (int) Math.ceil((double) (maxi-mini)/(n-1));
+        int buckets = (maxi-mini)/bucketSize+1;
+        int[] maxBuck = new int[buckets];
+        int[] minBuck = new int[buckets];
+        Arrays.fill(maxBuck,Integer.MIN_VALUE);
+        Arrays.fill(minBuck,Integer.MAX_VALUE);
+        for(int ele : nums){
+            int idx = (ele-mini)/bucketSize;
+            maxBuck[idx] = Math.max(maxBuck[idx],ele);
+            minBuck[idx] = Math.min(minBuck[idx],ele);
+        }
+        int maxGap=0;
+        int prevMax=mini;
+        for(int i=0;i<buckets;i++){
+            if(minBuck[i]==Integer.MAX_VALUE) continue;
+            maxGap = Math.max(maxGap,minBuck[i] - prevMax);
+            prevMax = maxBuck[i];
+        }
+        return maxGap;
+    }
+}
