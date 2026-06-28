@@ -1,0 +1,14 @@
+https://leetcode.com/problems/maximum-element-after-decreasing-and-rearranging/description/ 28-06-26
+
+class Solution {
+    public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
+        Arrays.sort(arr);
+        int maxi = 1;
+        for(int i=1;i<arr.length;i++){
+            if(arr[i]>maxi){
+                maxi++;
+            }
+        }
+        return maxi;
+    }
+}
