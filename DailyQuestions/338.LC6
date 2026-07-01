@@ -1,0 +1,24 @@
+https://leetcode.com/problems/zigzag-conversion/description 01-07-26
+
+class Solution {
+    public String convert(String s, int n) {
+        if(n==1) return s;
+        List<StringBuilder> res = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            res.add(new StringBuilder());
+        }
+        int j=0;
+        boolean down = true;
+        for(char ch : s.toCharArray()){
+            res.get(j).append(ch);
+            if(j==0) down = true;
+            else if(j==n-1) down = false;
+            j += down ? 1 : -1;
+        }
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<n;i++){
+            sb.append(res.get(i).toString());
+        }
+        return sb.toString();
+    }
+}
