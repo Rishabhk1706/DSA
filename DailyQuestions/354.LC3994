@@ -1,0 +1,23 @@
+https://leetcode.com/problems/minimum-adjacent-swaps-to-partition-array/ 18-07-26
+
+class Solution {
+    public int minAdjacentSwaps(int[] nums, int a, int b) {
+        long swaps=0;
+        long cnt=0;
+        long cntt=0;
+        long MOD = 1000000007; 
+        for(int n : nums){
+            if(n<a){
+                swaps = (swaps+cnt+cntt)%MOD;
+            }
+            else if(n<=b){
+                swaps = (swaps+cntt)%MOD;
+                cnt++;
+            }
+            else{
+                cntt++;
+            }
+        }
+        return (int) swaps;
+    }
+}
