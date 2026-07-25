@@ -1,0 +1,17 @@
+https://leetcode.com/problems/count-dominant-nodes-in-a-binary-tree/ 25-07-26
+
+class Solution {
+    int cnt=0;
+    public int dfs(TreeNode root){
+        if(root==null) return 0;
+        int left = dfs(root.left);
+        int right = dfs(root.right);
+        int maxi = Math.max(left,Math.max(right,root.val));
+        if(maxi==root.val) cnt++;
+        return maxi;
+    }
+    public int countDominantNodes(TreeNode root) {
+        dfs(root);
+        return cnt;
+    }
+}
