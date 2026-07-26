@@ -1,0 +1,26 @@
+https://leetcode.com/problems/aggregate-two-time-series/ 26-07-26
+
+class Solution {
+    public List<List<Integer>> aggregateTimeSeries(int[][] series1, int[][] series2) {
+        List<List<Integer>> ans = new ArrayList<>();
+        int i=0,j=0;
+        while(i<series1.length || j<series2.length){
+            int time;
+            if(i==series1.length) time = series2[j][0];
+            else if(j==series2.length) time = series1[i][0];
+            else time = Math.min(series1[i][0], series2[j][0]);
+
+            int val1=0;
+            if(i<series1.length) val1 = series1[i][1];
+            
+            int val2=0;
+            if(j<series2.length) val2 = series2[j][1];
+
+            ans.add(Arrays.asList(time, val1+val2));
+            
+            if(i<series1.length && time==series1[i][0]) i++;
+            if(j<series2.length && time==series2[j][0]) j++;
+        }
+        return ans;
+    }
+}
