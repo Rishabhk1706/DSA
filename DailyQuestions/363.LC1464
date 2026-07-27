@@ -1,0 +1,18 @@
+https://leetcode.com/problems/maximum-product-of-two-elements-in-an-array 27-07-26
+
+class Solution {
+    public int maxProduct(int[] nums) {
+        int m1 = Integer.MIN_VALUE;
+        int m2 = Integer.MIN_VALUE;
+        for(int j : nums){
+            if(j>m1){
+                m2 = m1;
+                m1 = j;
+            }
+            else if(j>m2){
+                m2 = j;
+            }
+        }
+        return (m1-1)*(m2-1);
+    }
+}
