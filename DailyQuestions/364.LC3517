@@ -1,0 +1,36 @@
+https://leetcode.com/problems/smallest-palindromic-rearrangement-i 28-07-26
+
+class Solution {
+    public String smallestPalindrome(String s) {
+        StringBuilder sb = new StringBuilder();
+        int[] f = new int[26];
+        for(char ch : s.toCharArray()){
+            f[ch-'a']++;
+        }
+        char ch='!';
+        for(int i=0;i<26;){
+            if(f[i]%2==1){
+                ch = (char) (97+i);
+                f[i]--;
+                continue;
+            }
+            else{
+                int val = f[i]/2;
+                for(int k=0;k<val;k++){
+                    sb.append((char) (97+i));
+                }
+                f[i]-=val;
+            }
+            i++;
+        }
+        if(ch!='!') sb.append(ch);
+        for(int i=25;i>=0;i--){
+            int val = f[i];
+            for(int k=0;k<val;k++){
+                sb.append((char) (97+i));
+            }
+            f[i]-=val;
+        }
+        return sb.toString();
+    }
+}
