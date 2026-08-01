@@ -1,0 +1,17 @@
+https://leetcode.com/problems/count-valid-prefixes/description/ 01-08-26
+
+class Solution {
+    public int countValidPrefixes(String s) {
+        int z=0,o=0,c=0;
+        for(char ch : s.toCharArray()){
+            if(ch=='0'){
+                z++;
+            }
+            else{
+                o++;
+            }
+            if(Math.abs(z-o) < 2) c++;
+        }
+        return c;
+    }
+}
