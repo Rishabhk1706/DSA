@@ -1,0 +1,7 @@
+https://leetcode.com/problems/stone-game/description 02-08-26
+
+class Solution {
+    public boolean stoneGame(int[] piles) {
+        return true;
+    }
+}
