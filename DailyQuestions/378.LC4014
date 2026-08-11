@@ -1,0 +1,21 @@
+https://leetcode.com/problems/minimum-total-price-after-applying-discounts/ 11-08-26
+
+class Solution {
+    public double minPrice(int[] prices, int[] discounts) {
+        Arrays.sort(prices);
+        Arrays.sort(discounts);
+        int i=prices.length-1;
+        int j=discounts.length-1;
+        double val = 0;
+        while(j>=0 && i>=0){
+            val += (double) prices[i]*(100-discounts[j])/100;
+            i--;
+            j--;
+        }
+        while(i>=0){
+            val+=prices[i];
+            i--;
+        }
+        return val;
+    }
+}
