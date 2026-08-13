@@ -1,0 +1,26 @@
+https://leetcode.com/problems/lru-cache/description/ 13-08-26
+
+class LRUCache {
+    HashMap<Integer,Integer> map;
+    int capacity;
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        map = new LinkedHashMap<>(capacity,0.75f,true);
+    }
+    
+    public int get(int key) {
+        return map.getOrDefault(key,-1);
+    }
+    
+    public void put(int key, int value) {
+        map.put(key,value);
+        if(map.size()>capacity){
+            int lru = 0;
+            for(Map.Entry<Integer,Integer> e : map.entrySet()){
+                lru = e.getKey();
+                break;
+            }
+            map.remove(lru);
+        }
+    }
+}
