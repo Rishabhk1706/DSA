@@ -1,0 +1,28 @@
+https://leetcode.com/problems/find-the-largest-almost-missing-integer 18-08-26
+
+class Solution {
+    public int largestInteger(int[] nums, int k) {
+        int n = nums.length;
+        if(n==k){
+            int maxi = Integer.MIN_VALUE;
+            for(int j : nums){
+                maxi = Math.max(maxi,j);
+            }
+            return maxi;
+        }
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int j : nums){
+            map.put(j,map.getOrDefault(j,0)+1);
+        }
+        int maxi = -1;
+        if(k==1){
+            for(int j : nums){
+                if(map.get(j)==1) maxi = Math.max(maxi,j);
+            }
+            return maxi;
+        }
+        if(map.get(nums[0])==1) maxi = nums[0];
+        if(map.get(nums[n-1])==1) maxi = Math.max(maxi,nums[n-1]);
+        return maxi;
+    }
+}
