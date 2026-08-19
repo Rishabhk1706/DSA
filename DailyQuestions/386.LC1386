@@ -1,0 +1,46 @@
+https://leetcode.com/problems/cinema-seat-allocation/description 19-08-26
+
+class Solution {
+    public int maxNumberOfFamilies(int n, int[][] reservedSeats) {
+        int q = reservedSeats.length;
+        Arrays.sort(reservedSeats, (a,b) -> {
+            if(a[0]==b[0]) return a[1]-b[1];
+            return a[0]-b[0];
+        });
+        boolean[] seats = new boolean[10];
+        int c=0;
+        int k=0;
+        for(int i=0;i<n;){
+            while(k<q && reservedSeats[k][0]==i+1){
+                seats[reservedSeats[k][1]-1] = true;
+                k++;
+            }
+            if(!seats[1] && !seats[2] && !seats[3] && !seats[4]){
+                seats[3] = true;
+                seats[4] = true;
+                c++;
+            }
+            if(!seats[3] && !seats[4] && !seats[5] && !seats[6]){
+                seats[5] = true;
+                seats[6] = true;
+                c++;
+            }
+            if(!seats[5] && !seats[6] && !seats[7] && !seats[8]){
+                c++;
+            }
+            if(k<q){
+                int val = reservedSeats[k][0]-(i+1)-1;
+                i+=val;
+                c+=(2*val);
+            }
+            if(k==q){
+                int val = n-(i+1);
+                c+=(2*val);
+                break;
+            }
+            i++;
+            seats = new boolean[10];
+        }
+        return c;
+    }
+}
