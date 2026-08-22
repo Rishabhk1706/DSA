@@ -1,0 +1,18 @@
+https://leetcode.com/problems/check-divisibility-by-digit-sum-and-product 22-08-26
+
+class Solution {
+    public boolean checkDivisibility(int n) {
+        int m=n;
+        int digisum=0;
+        int digipro=1;
+        while(m>0){
+            digisum+=m%10;
+            digipro*=m%10;
+            m=m/10;
+        }
+        if(n%(digisum+digipro)==0){
+            return true;
+        }
+        return false;
+    }
+}
