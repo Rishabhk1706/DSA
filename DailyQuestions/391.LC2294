@@ -1,0 +1,16 @@
+https://leetcode.com/problems/partition-array-such-that-maximum-difference-is-k 24-08-26
+
+class Solution {
+    public int partitionArray(int[] nums, int k) {
+        int count=1;
+        Arrays.sort(nums);
+        int prev=nums[0];
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]-prev > k){
+                count++;
+                prev=nums[i];
+            }  
+        }
+        return count;
+    }
+}
