@@ -1,0 +1,31 @@
+https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array-ii/ 27-08-26
+
+class Solution {
+    public List<List<Integer>> findDisappearedNumbers(int[] nums, int lower, int upper) {
+        List<List<Integer>> al = new ArrayList<>();
+        List<Integer> t = new ArrayList<>();
+        HashSet<Integer> set = new HashSet<>();
+        for(int j : nums){
+            set.add(j);
+        }
+        int prev=0;
+        for(int i=lower;i<=upper;i++){
+            if(!set.contains(i)){
+                if(t.size()==0) t.add(i);
+            }
+            else{
+                if(t.size()>0){
+                    t.add(prev);
+                    al.add(new ArrayList<>(t));
+                    t.clear();
+                }
+            }
+            prev=i;
+        }
+        if(t.size()>0){
+            t.add(prev);
+            al.add(new ArrayList<>(t));
+        }
+        return al;
+    }
+}
