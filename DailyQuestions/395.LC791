@@ -1,0 +1,27 @@
+https://leetcode.com/problems/custom-sort-string/?envType=problem-list-v2&envId=string  28-08-26
+
+class Solution {
+    public String customSortString(String order, String s) {
+        HashMap<Character, Integer> cc = new HashMap<>();
+        for(char c : s.toCharArray()){
+            cc.put(c, cc.getOrDefault(c, 0) + 1);
+        }
+        StringBuilder res = new StringBuilder();
+        for(char c : order.toCharArray()){
+            if(cc.containsKey(c)){
+                int cnt = cc.get(c);
+                for(int i=0;i<cnt;i++){
+                    res.append(c);
+                }
+                cc.remove(c);
+            }
+        }
+        for(char c : cc.keySet()){
+            int cq = cc.get(c);
+            for (int i=0;i<cq;i++){
+                res.append(c);
+            }
+        }
+        return res.toString();
+    }
+}
