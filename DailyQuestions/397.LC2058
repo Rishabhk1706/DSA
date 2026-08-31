@@ -1,0 +1,29 @@
+https://leetcode.com/problems/find-the-minimum-and-maximum-number-of-nodes-between-critical-points/ 31-08-26
+
+class Solution {
+    public int[] nodesBetweenCriticalPoints(ListNode head) {
+        ArrayList<Integer> al = new ArrayList<>();
+        ListNode prev=head;
+        ListNode cur = head.next;
+        ListNode front = head.next.next;
+        if(prev==null || cur==null || front==null){
+            return new int[]{-1,-1};
+        }
+        int z=3;
+        while(front!=null){
+            if(cur.val>prev.val && cur.val>front.val) al.add(z-1);
+            if(cur.val<prev.val && cur.val<front.val) al.add(z-1);
+            prev = cur;
+            cur = front;
+            front = front.next;
+            z++;
+        }
+        if(al.size()<2) return new int[]{-1,-1};
+        int mind = Integer.MAX_VALUE;
+        int maxd = al.get(al.size()-1) - al.get(0);
+        for(int i=1;i<al.size();i++){
+            mind = Math.min(mind,al.get(i)-al.get(i-1));
+        }
+        return new int[]{mind,maxd};
+    }
+}
