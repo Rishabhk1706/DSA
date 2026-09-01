@@ -1,0 +1,39 @@
+https://leetcode.com/problems/asteroid-collision/ 01-09-26
+
+class Solution {
+    public int[] asteroidCollision(int[] asteroids) {
+        ArrayDeque<Integer> st = new ArrayDeque<>();
+        for(int i=0;i<asteroids.length;i++){
+            if(asteroids[i]>0){
+                st.push(asteroids[i]);
+            }
+            else{
+                boolean flag = false;
+                while(!st.isEmpty() && st.peek()>0){
+                    if(st.peek()<-asteroids[i]){
+                        st.pop();
+                    }
+                    else if(st.peek()== -asteroids[i]){
+                        st.pop();
+                        flag=true;
+                        break;
+                    }
+                    else{
+                        break;
+                    }
+                }
+                if(flag){
+                    continue;
+                }
+                if(st.isEmpty() || st.peek()<0){
+                    st.push(asteroids[i]);
+                }
+            }
+        }
+        int[] res = new int[st.size()];
+        for(int i=st.size()-1;i>=0;i--){
+            res[i]=st.pop();
+        }
+        return res;
+    }
+}
