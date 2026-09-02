@@ -1,0 +1,7 @@
+https://leetcode.com/problems/construct-uniform-parity-array-i 02-09-26
+
+class Solution {
+    public boolean uniformArray(int[] nums1) {
+        return true;
+    }
+}
