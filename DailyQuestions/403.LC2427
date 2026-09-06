@@ -1,0 +1,14 @@
+https://leetcode.com/problems/number-of-common-factors/description 06-09-26
+
+class Solution{
+    public int commonFactors(int a, int b){
+        int c = 0;
+        int limit = Math.min(a,b);
+        for(int i=1;i<=limit;i++){
+            if(a%i==0 && b%i==0){
+                c++;
+            }
+        }
+        return c;
+    }
+}
