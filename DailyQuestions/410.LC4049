@@ -1,0 +1,47 @@
+https://leetcode.com/problems/count-values-with-equally-spaced-occurrences-ii/ 13-09-26
+
+class Solution {
+    static class Info{
+        int cnt;
+        int first;
+        int last;
+        int diff;
+        boolean valid;
+        Info(int ind){
+            cnt=1;
+            first = ind;
+            last = ind;
+            diff = 0;
+            valid = true;
+        }
+    }
+    public int countSpecialIntegers(int[] nums) {
+        HashMap<Integer, Info> map = new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            int x = nums[i];
+            if(!map.containsKey(x)){
+                map.put(x, new Info(i));
+            }
+            else{
+                Info info = map.get(x);
+                info.cnt++;
+                if(info.cnt==2){
+                    info.diff = i-info.last;
+                }
+                else{
+                    if(i-info.last != info.diff){
+                        info.valid = false;
+                    }
+                }
+                info.last = i;
+            }
+        }
+        int ans = 0;
+        for(Info info : map.values()){
+            if(info.cnt >= 3 && info.valid){
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
