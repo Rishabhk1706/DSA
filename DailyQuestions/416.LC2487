@@ -1,0 +1,37 @@
+https://leetcode.com/problems/remove-nodes-from-linked-list 20-09-26
+
+class Solution {
+    private ListNode reverseList(ListNode head){
+        ListNode prev = null;
+        ListNode ptr = head;
+        while(ptr!=null){
+            ListNode nextnode=ptr.next;
+            ptr.next=prev;
+            prev=ptr;
+            ptr=nextnode;
+        }
+        return prev;
+    }
+    public ListNode removeNodes(ListNode head) {
+        if(head.next==null){
+            return head;
+        }
+        head = reverseList(head);
+
+        ListNode cur = head;
+        int max=cur.val;
+        ListNode res=cur;
+        cur=cur.next;
+        while(cur!=null){
+            if(cur.val>=max){
+                max=cur.val;
+                res.next=cur;
+                res=res.next;
+            }
+            cur=cur.next;
+        }
+        res.next=null;
+
+        return reverseList(head);
+    }
+}
