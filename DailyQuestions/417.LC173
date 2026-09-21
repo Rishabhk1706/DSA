@@ -1,0 +1,30 @@
+https://leetcode.com/problems/binary-search-tree-iterator/description 21-09-26
+
+class BSTIterator {
+    ArrayList<Integer> al;
+    int size=0;
+    int ind=-1;
+    public void inorder(TreeNode root){
+        if(root==null) return;
+        inorder(root.left);
+        al.add(root.val);
+        inorder(root.right);
+    }
+    public BSTIterator(TreeNode root) {
+        al = new ArrayList<>();
+        inorder(root);
+        size = al.size();
+    }
+    
+    public int next() {
+        ind++;
+        return al.get(ind);
+    }
+    
+    public boolean hasNext() {
+        if(ind+1<size){
+            return true;
+        }
+        return false;
+    }
+}
