@@ -1,0 +1,30 @@
+https://leetcode.com/problems/find-the-power-of-k-size-subarrays-i 25-09-26
+
+class Solution {
+    public int[] resultsArray(int[] nums, int k) {
+        int n = nums.length;
+        int[] res = new int[n];
+        for(int i=1;i<n;i++){
+            if(nums[i]!=(nums[i-1]+1)){
+                res[i]=1;
+            }
+        }
+        int sum=0;
+        int[] ans = new int[n-k+1];
+        int j=0;
+        int l=0;
+        for(int r=0;r<n;r++){
+            sum+=res[r];
+            if(r-l+1==k){
+                sum-=res[l++];
+                if(sum==0){
+                    ans[j++] = nums[r];
+                }
+                else{
+                    ans[j++] = -1;
+                }
+            }
+        }
+        return ans;
+    }
+}
