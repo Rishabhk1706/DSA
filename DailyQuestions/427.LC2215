@@ -1,0 +1,22 @@
+https://leetcode.com/problems/find-the-difference-of-two-arrays/ 02-10-26
+
+class Solution {
+    public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        HashSet<Integer> s1 = new HashSet<>();
+        HashSet<Integer> s2 = new HashSet<>();
+        for(int ele : nums1){
+            s1.add(ele);   
+        }
+        for(int ele : nums2){
+           s2.add(ele);
+        }    
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> l1 = new ArrayList<>(s1);
+        List<Integer> l2 = new ArrayList<>(s2);
+        l1.removeAll(s2);
+        l2.removeAll(s1);
+        list.add(l1);
+        list.add(l2);
+        return list;
+    }
+}
