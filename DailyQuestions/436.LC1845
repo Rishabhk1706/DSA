@@ -1,0 +1,25 @@
+https://leetcode.com/problems/seat-reservation-manager 12-10-26
+
+class SeatManager {
+    int ind;
+    TreeSet<Integer> set;
+    public SeatManager(int n) {
+        ind=1;
+        set = new TreeSet<>();
+    }
+    
+    public int reserve() {
+        if(!set.isEmpty()){
+            int seat = set.first();
+            set.remove(seat);
+            return seat;
+        }
+        int seat = ind;
+        ind++;
+        return seat;
+    }
+    
+    public void unreserve(int seatNumber) {
+        set.add(seatNumber);
+    }
+}
