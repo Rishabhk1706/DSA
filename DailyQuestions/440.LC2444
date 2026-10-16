@@ -1,0 +1,23 @@
+https://leetcode.com/problems/count-subarrays-with-fixed-bounds 16-10-26
+
+class Solution {
+    public long countSubarrays(int[] nums, int minK, int maxK) {
+        long sum=0;
+        int min=-1;
+        int max=-1;
+        int last=-1;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==minK){
+                min=i;
+            }
+            if(nums[i]==maxK){
+                max=i;
+            }
+            if(nums[i]>maxK || nums[i]<minK){
+                last=i;
+            }
+            sum+=Math.max(0,Math.min(min,max)-last);
+        }
+        return sum;
+    }
+}
