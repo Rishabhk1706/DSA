@@ -1,0 +1,18 @@
+https://leetcode.com/problems/find-valid-matrix-given-row-and-column-sums/ 23-10-26
+
+class Solution {
+    public int[][] restoreMatrix(int[] rowSum, int[] colSum) {
+        int n=colSum.length;
+        int m=rowSum.length;
+        int[][] arr = new int[m][n];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                int ans = Math.min(rowSum[i], colSum[j]);
+                arr[i][j] = ans;
+                rowSum[i] -= ans;
+                colSum[j] -= ans;
+            }
+        }
+        return arr;
+    }
+}
