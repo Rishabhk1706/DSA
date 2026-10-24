@@ -1,0 +1,16 @@
+https://leetcode.com/problems/split-a-string-in-balanced-strings 24-10-26
+
+class Solution {
+    public int balancedStringSplit(String s) {
+        int ans=0, l = 0;
+        for(char c : s.toCharArray()){
+            if(c == 'L')
+                l += 1;
+            else
+                l -= 1;
+            if(l == 0)
+                ans += 1;
+        }
+        return ans;
+    }
+}
