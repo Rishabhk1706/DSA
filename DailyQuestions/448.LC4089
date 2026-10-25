@@ -1,0 +1,19 @@
+https://leetcode.com/problems/count-subarrays-with-loose-bounds/ 25-10-26
+
+class Solution {
+    public long countSubarrays(int[] nums, int minK, int maxK) {
+        int l=-1,r=0;
+        long c=0;
+        while(r<nums.length){
+            if(nums[r]>=minK && nums[r]<=maxK){
+                if(l==-1) l=r;
+                c+=(r-l+1);
+            }
+            else{
+                l=-1;
+            }
+            r++;
+        }
+        return c;
+    }
+}
