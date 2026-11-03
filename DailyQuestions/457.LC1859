@@ -1,0 +1,14 @@
+https://leetcode.com/problems/sorting-the-sentence/ 03-11-26
+
+class Solution {
+    public String sortSentence(String s) {
+        String[] k = s.split(" ");
+        Arrays.sort(k, (a,b) -> Integer.compare(Integer.parseInt(a.substring(a.length()-1,a.length())), Integer.parseInt(b.substring(b.length()-1,b.length()))));
+        StringBuilder sb = new StringBuilder();
+        for(String p : k){
+            sb.append(p.substring(0,p.length()-1)).append(" ");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        return sb.toString();
+    }
+}
