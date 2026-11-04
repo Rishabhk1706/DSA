@@ -1,0 +1,35 @@
+https://leetcode.com/problems/insert-delete-getrandom-o1/ 04-11-26
+
+class RandomizedSet {
+    Random rand;
+    List<Integer> al;
+    HashMap<Integer,Integer> map;
+    public RandomizedSet() {
+        map = new HashMap<>();
+        al = new ArrayList<>();
+        rand = new Random();
+    }
+    
+    public boolean insert(int val) {
+        if(map.containsKey(val)) return false;
+        al.add(val);
+        map.put(val,al.size()-1);
+        return true;
+    }
+    
+    public boolean remove(int val) {
+        if(!map.containsKey(val)) return false;
+        int index = map.get(val);
+        int lastEle = al.get(al.size()-1);
+        al.set(index,lastEle);
+        map.put(lastEle,index);
+        map.remove(val);
+        al.removeLast();
+        return true;
+    }
+    
+    public int getRandom() {
+        int index = rand.nextInt(al.size());
+        return al.get(index);
+    }
+}
