@@ -1,0 +1,26 @@
+https://leetcode.com/problems/find-mismatched-segments-between-two-strings/description/ 09-11-26
+
+class Solution {
+    public List<List<String>> findMismatchedSegments(String s1, String s2) {
+        List<List<String>> al = new ArrayList<>();
+        StringBuilder sb1 = new StringBuilder();
+        StringBuilder sb2 = new StringBuilder();
+        for(int i=0;i<s1.length();i++){
+            if(s1.charAt(i)!=s2.charAt(i)){
+                sb1.append(s1.charAt(i));
+                sb2.append(s2.charAt(i));
+            }
+            if(s1.charAt(i)==s2.charAt(i) || i==s1.length()-1){
+                if(sb1.length()>0){
+                    List<String> a = new ArrayList<>();
+                    a.add(sb1.toString());
+                    a.add(sb2.toString());
+                    al.add(a);
+                    sb1.setLength(0);
+                    sb2.setLength(0);
+                }
+            }
+        }
+        return al;
+    }
+}
