@@ -1,0 +1,22 @@
+https://leetcode.com/problems/longest-strictly-increasing-or-strictly-decreasing-subarray 12-11-26
+
+class Solution {
+    public int longestMonotonicSubarray(int[] nums) {
+        int maxi=1;
+        int l=0;
+        for(int r=1;r<nums.length;r++){
+            if(nums[r]<=nums[r-1]){
+                l=r;
+            }
+            maxi = Math.max(maxi,r-l+1);
+        }
+        l=0;
+        for(int r=1;r<nums.length;r++){
+            if(nums[r]>=nums[r-1]){
+                l=r;
+            }
+            maxi = Math.max(maxi,r-l+1);
+        }
+        return maxi;
+    }
+}
